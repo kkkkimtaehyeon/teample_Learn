@@ -1,6 +1,7 @@
 package com.example.teample_learn.post;
 
 import com.example.teample_learn.post.dto.PostRequestDto;
+import com.example.teample_learn.post.dto.PostUpdateRequestDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -44,5 +45,11 @@ public class Posts extends BaseTime{
         this.title = title;
         this.content = content;
         this.category = category;
+    }
+
+    public void update(PostUpdateRequestDto requestDto) {
+        this.title = requestDto.getTitle();
+        this.content = requestDto.getContent();
+        this.category = requestDto.getCategory();
     }
 }

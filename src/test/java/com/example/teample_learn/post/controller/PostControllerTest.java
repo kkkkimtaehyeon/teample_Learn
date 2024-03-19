@@ -6,6 +6,7 @@ import com.example.teample_learn.post.PostRepository;
 import com.example.teample_learn.post.Posts;
 import com.example.teample_learn.post.dto.PostRequestDto;
 import com.example.teample_learn.post.dto.PostResponseDto;
+import com.example.teample_learn.post.dto.PostUpdateRequestDto;
 import java.util.List;
 import org.junit.After;
 import org.junit.Test;
@@ -15,6 +16,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -98,5 +101,47 @@ public class PostControllerTest {
         assertThat(posts.getContent()).isEqualTo(content);
         assertThat(posts.getCategory()).isEqualTo(category);
 
+    }
+
+    @Test
+    public void post_수정된다() {
+        Posts savedPost = Posts.builder()
+                .author("author")
+                .title("title")
+                .content("content")
+                .category("category")
+                .build();
+
+        Long postId = postRepository.save(savedPost).getId();
+
+        String expectedTitle = "title1";
+        String expectedContent = "content1";
+        String expectedCategory = "category1";
+
+        PostUpdateRequestDto requestDto = PostUpdateRequestDto.builder()
+                .title(expectedTitle)
+                .content(expectedContent)
+                .category(expectedCategory)
+                .build();
+
+
+
+        String url = "http://localhost:" + port + "/post/" + postId;
+
+        //json 형식으로 http 요청을 전송
+        HttpEntity<PostUpdateRequestDto> requestEntity = new HttpEntity<>(requestDto);
+
+        ResponseEntity<Long> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, requestEntity, Long.class);
+
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(responseEntity.getBody()).isGreaterThan(0L);
+
+        List<Posts> postList = postRepository.findAll();
+
+        Posts posts = postList.get(0);
+        assertThat(posts.getAuthor()).isEqualTo("author");
+        assertThat(posts.getTitle()).isEqualTo(expectedTitle);
+        assertThat(posts.getContent()).isEqualTo(expectedContent);
+        assertThat(posts.getCategory()).isEqualTo(expectedCategory);
     }
 }
