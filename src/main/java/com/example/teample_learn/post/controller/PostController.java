@@ -19,7 +19,6 @@ public class PostController {
     @GetMapping("/post/{id}")
     public PostResponseDto view(@PathVariable("id") Long id) {
         return postService.findById(id);
-
     }
 
 
