@@ -2,6 +2,8 @@ package com.example.teample_learn.post;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.example.teample_learn.post.domain.Posts;
+import com.example.teample_learn.post.repo.PostRepository;
 import java.util.List;
 import org.aspectj.lang.annotation.After;
 import org.junit.Test;

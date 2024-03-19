@@ -1,5 +1,6 @@
-package com.example.teample_learn.post;
+package com.example.teample_learn.post.repo;
 
+import com.example.teample_learn.post.domain.Posts;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,8 +1,8 @@
 package com.example.teample_learn.post.service;
 
-import com.example.teample_learn.post.PostRepository;
-import com.example.teample_learn.post.Posts;
-import com.example.teample_learn.post.dto.PostRequestDto;
+import com.example.teample_learn.post.repo.PostRepository;
+import com.example.teample_learn.post.domain.Posts;
+import com.example.teample_learn.post.dto.PostSaveRequestDto;
 import com.example.teample_learn.post.dto.PostResponseDto;
 import com.example.teample_learn.post.dto.PostUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ public class PostService {
 
     private final PostRepository postRepository;
 
-    public Long save(PostRequestDto requestDto) {
+    public Long save(PostSaveRequestDto requestDto) {
         return postRepository.save(requestDto.toEntity()).getId();
     }
 
@@ -31,6 +31,11 @@ public class PostService {
         post.update(requestDto);
 
         return id;
+    }
+
+    public void delete(Long id) {
+        Posts post = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시물이 없습니다" + id));
+        postRepository.delete(post);
     }
 
 }

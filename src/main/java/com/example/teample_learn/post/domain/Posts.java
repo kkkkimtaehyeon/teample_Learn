@@ -1,6 +1,5 @@
-package com.example.teample_learn.post;
+package com.example.teample_learn.post.domain;
 
-import com.example.teample_learn.post.dto.PostRequestDto;
 import com.example.teample_learn.post.dto.PostUpdateRequestDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

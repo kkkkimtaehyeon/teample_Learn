@@ -1,7 +1,6 @@
 package com.example.teample_learn.post.dto;
 
-import com.example.teample_learn.post.Posts;
-import lombok.Builder;
+import com.example.teample_learn.post.domain.Posts;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

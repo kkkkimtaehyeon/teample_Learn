@@ -1,10 +1,11 @@
 package com.example.teample_learn.post.controller;
 
-import com.example.teample_learn.post.dto.PostRequestDto;
+import com.example.teample_learn.post.dto.PostSaveRequestDto;
 import com.example.teample_learn.post.dto.PostResponseDto;
 import com.example.teample_learn.post.dto.PostUpdateRequestDto;
 import com.example.teample_learn.post.service.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +25,7 @@ public class PostController {
     }
 
     @PostMapping("/post")
-    public Long save(@RequestBody PostRequestDto requestDto) {
+    public Long save(@RequestBody PostSaveRequestDto requestDto) {
         return postService.save(requestDto);
     }
 
@@ -32,5 +33,10 @@ public class PostController {
     public Long update(@PathVariable("id") Long id, @RequestBody PostUpdateRequestDto requestDto) {
         return postService.update(id, requestDto);
 
+    }
+
+    @DeleteMapping("/post/{id}")
+    public void delete(@PathVariable("id") Long id) {
+        postService.delete(id);
     }
 }

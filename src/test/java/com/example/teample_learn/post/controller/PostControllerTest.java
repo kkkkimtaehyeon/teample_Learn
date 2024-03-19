@@ -2,12 +2,13 @@ package com.example.teample_learn.post.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.teample_learn.post.PostRepository;
-import com.example.teample_learn.post.Posts;
-import com.example.teample_learn.post.dto.PostRequestDto;
+import com.example.teample_learn.post.repo.PostRepository;
+import com.example.teample_learn.post.domain.Posts;
+import com.example.teample_learn.post.dto.PostSaveRequestDto;
 import com.example.teample_learn.post.dto.PostResponseDto;
 import com.example.teample_learn.post.dto.PostUpdateRequestDto;
 import java.util.List;
+import org.assertj.core.api.Assertions;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,7 +48,7 @@ public class PostControllerTest {
         String content = "내용";
         String category = "개발";
 
-        PostRequestDto requestDto = PostRequestDto.builder()
+        PostSaveRequestDto requestDto = PostSaveRequestDto.builder()
                 .author(author)
                 .title(title)
                 .content(content)
@@ -79,7 +80,7 @@ public class PostControllerTest {
         String content = "내용";
         String category = "개발";
 
-        PostRequestDto requestDto = PostRequestDto.builder()
+        PostSaveRequestDto requestDto = PostSaveRequestDto.builder()
                 .author(author)
                 .title(title)
                 .content(content)
@@ -144,4 +145,23 @@ public class PostControllerTest {
         assertThat(posts.getContent()).isEqualTo(expectedContent);
         assertThat(posts.getCategory()).isEqualTo(expectedCategory);
     }
+
+    @Test
+    public void posts_삭제된다() {
+        Posts savedPost = Posts.builder()
+                .author("author")
+                .title("title")
+                .content("content")
+                .category("category")
+                .build();
+
+        Long postId = postRepository.save(savedPost).getId();
+        String url = "http://localhost:" + port + "/post/" + postId;
+
+        assertThat(postRepository.count()).isEqualTo(1);
+
+        restTemplate.delete(url);
+        assertThat(postRepository.count()).isEqualTo(0);
+    }
+
 }
