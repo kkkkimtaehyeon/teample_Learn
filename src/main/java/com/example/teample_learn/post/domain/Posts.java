@@ -29,11 +29,11 @@ public class Posts extends BaseTime{
 
     @Column(name = "view_count")
     @ColumnDefault("0")
-    private int view;
+    private int viewCount;
 
     @Column(name = "scrap_count")
     @ColumnDefault("0")
-    private int scrap;
+    private int scrapCount;
 
     @Column(nullable = false, name = "category")
     private String category;
@@ -50,5 +50,15 @@ public class Posts extends BaseTime{
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
         this.category = requestDto.getCategory();
+    }
+
+    public void addViewCount() {
+        viewCount++;
+    }
+    public void addScrapCount() {
+        scrapCount++;
+    }
+    public void subScrapCount() {
+        scrapCount--;
     }
 }
