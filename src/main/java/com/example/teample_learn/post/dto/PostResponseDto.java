@@ -15,6 +15,11 @@ public class PostResponseDto {
     String category;
     int view;
     int scrap;
+    String requiredSkills;
+    String tags;
+    Boolean contact;
+    String className;
+    int classDivision;
 
     public PostResponseDto(Posts post) {
         this.id = post.getId();
@@ -22,7 +27,12 @@ public class PostResponseDto {
         this.title = post.getTitle();
         this.content = post.getContent();
         this.category = post.getCategory();
-        this.view = post.getView();
-        this.scrap = post.getScrap();
+        this.view = post.getViewCount();
+        this.scrap = post.getScrapCount();
+        this.requiredSkills = post.getRequiredSkills();
+        this.tags = post.getTags();
+        this.contact = post.getContact();
+        this.className = post.getClassName();
+        this.classDivision = post.getClassDivision();
     }
 }

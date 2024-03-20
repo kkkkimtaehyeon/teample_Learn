@@ -35,6 +35,11 @@ public class PostControllerTest {
     @Autowired
     private PostRepository postRepository;
 
+   static String author = "작성자";
+   static String title = "제목";
+   static String content = "내용";
+   static String category = "개발";
+   static Boolean contact = true;
 
     @After
     public void cleanUp() {
@@ -47,16 +52,13 @@ public class PostControllerTest {
     }
     @Test
     public void Posts_조회한다() {
-        String author = "작성자";
-        String title = "제목";
-        String content = "내용";
-        String category = "개발";
 
         PostSaveRequestDto requestDto = PostSaveRequestDto.builder()
                 .author(author)
                 .title(title)
                 .content(content)
                 .category(category)
+                .contact(contact)
                 .build();
 
         Long postId = postRepository.save(requestDto.toEntity()).getId();
@@ -79,16 +81,13 @@ public class PostControllerTest {
 
     @Test
     public void Posts_등록된다() {
-        String author = "작성자";
-        String title = "제목";
-        String content = "내용";
-        String category = "개발";
 
         PostSaveRequestDto requestDto = PostSaveRequestDto.builder()
                 .author(author)
                 .title(title)
                 .content(content)
                 .category(category)
+                .contact(contact)
                 .build();
 
         String url = "http://localhost:" + port + "/post";
@@ -111,10 +110,11 @@ public class PostControllerTest {
     @Test
     public void post_수정된다() {
         Posts savedPost = Posts.builder()
-                .author("author")
-                .title("title")
-                .content("content")
-                .category("category")
+                .author(author)
+                .title(title)
+                .content(content)
+                .category(category)
+                .contact(contact)
                 .build();
 
         Long postId = postRepository.save(savedPost).getId();
@@ -122,12 +122,15 @@ public class PostControllerTest {
         String expectedTitle = "title1";
         String expectedContent = "content1";
         String expectedCategory = "category1";
+        Boolean expectedContact = false;
 
         PostUpdateRequestDto requestDto = PostUpdateRequestDto.builder()
                 .title(expectedTitle)
                 .content(expectedContent)
                 .category(expectedCategory)
+                .contact(expectedContact)
                 .build();
+
 
 
 
@@ -144,19 +147,21 @@ public class PostControllerTest {
         List<Posts> postList = postRepository.findAll();
 
         Posts posts = postList.get(0);
-        assertThat(posts.getAuthor()).isEqualTo("author");
+        assertThat(posts.getAuthor()).isEqualTo("작성자");
         assertThat(posts.getTitle()).isEqualTo(expectedTitle);
         assertThat(posts.getContent()).isEqualTo(expectedContent);
         assertThat(posts.getCategory()).isEqualTo(expectedCategory);
+        assertThat(posts.getContact()).isEqualTo(expectedContact);
     }
 
     @Test
     public void posts_삭제된다() {
         Posts savedPost = Posts.builder()
-                .author("author")
-                .title("title")
-                .content("content")
-                .category("category")
+                .author(author)
+                .title(title)
+                .content(content)
+                .category(category)
+                .contact(contact)
                 .build();
 
         Long postId = postRepository.save(savedPost).getId();

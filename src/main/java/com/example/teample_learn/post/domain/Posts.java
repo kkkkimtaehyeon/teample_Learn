@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,7 @@ public class Posts extends BaseTime{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "author_id")
+    @Column(nullable = false, name = "author")
     private String author;
 
     @Column(nullable = false, name = "title")
@@ -38,12 +39,33 @@ public class Posts extends BaseTime{
     @Column(nullable = false, name = "category")
     private String category;
 
+    @Column(nullable = true, name = "required_skills")
+    private String requiredSkills;
+
+    @Column(nullable = true, name = "tags")
+    private String tags;
+
+    @Column(nullable = false, name = "contact")
+    private Boolean contact;
+
+    @Column(nullable = true, name = "class_name")
+    private String className;
+
+    @Column(nullable = true, name = "class_division")
+    private int classDivision;
+
+
     @Builder
-    public Posts(String author, String title, String content, String category) {
+    public Posts(String author, String title, String content, String category, String requiredSkills, String tags, Boolean contact, String className, int classDivision) {
         this.author = author;
         this.title = title;
         this.content = content;
         this.category = category;
+        this.requiredSkills = requiredSkills;
+        this.tags = tags;
+        this.contact = contact;
+        this.className = className;
+        this.classDivision = classDivision;
     }
 
     public void update(PostUpdateRequestDto requestDto) {

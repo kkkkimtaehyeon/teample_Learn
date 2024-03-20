@@ -11,11 +11,21 @@ public class PostUpdateRequestDto {
     String title;
     String content;
     String category;
+    String requiredSkills;
+    String tags;
+    Boolean contact;
+    String className;
+    int classDivision;
 
     @Builder
-    public PostUpdateRequestDto (String title, String content, String category) {
+    public PostUpdateRequestDto (String title, String content, String category, String requiredSkills, String tags, Boolean contact, String className, int classDivision) {
         this.title = title;
         this.content = content;
         this.category = category;
+        this.requiredSkills = requiredSkills;
+        this.tags = tags;
+        this.contact = contact;
+        this.className = className;
+        this.classDivision = classDivision;
     }
 }
