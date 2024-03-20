@@ -2,11 +2,12 @@ package com.example.teample_learn.post.dto;
 
 import com.example.teample_learn.post.domain.Posts;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
-@Getter
+@Data
 public class PostSaveRequestDto {
 
     String author;
@@ -17,10 +18,10 @@ public class PostSaveRequestDto {
     String tags;
     Boolean contact;
     String className;
-    int classDivision;
+    String classDivision;
 
     @Builder
-    public PostSaveRequestDto(String author, String title, String content, String category, String requiredSkills, String tags, Boolean contact, String className, int classDivision) {
+    public PostSaveRequestDto(String author, String title, String content, String category, String requiredSkills, String tags, Boolean contact, String className, String classDivision) {
         this.author = author;
         this.title = title;
         this.content = content;

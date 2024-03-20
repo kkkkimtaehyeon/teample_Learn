@@ -6,7 +6,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +18,7 @@ public class Posts extends BaseTime{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, name = "author")
+    @Column(nullable = true, name = "author")
     private String author;
 
     @Column(nullable = false, name = "title")
@@ -28,15 +27,15 @@ public class Posts extends BaseTime{
     @Column(nullable = false, name = "content")
     private String content;
 
-    @Column(name = "view_count")
+    @Column(nullable = true, name = "view_count")
     @ColumnDefault("0")
     private int viewCount;
 
-    @Column(name = "scrap_count")
+    @Column(nullable = true, name = "scrap_count")
     @ColumnDefault("0")
     private int scrapCount;
 
-    @Column(nullable = false, name = "category")
+    @Column(nullable = true, name = "category")
     private String category;
 
     @Column(nullable = true, name = "required_skills")
@@ -45,18 +44,18 @@ public class Posts extends BaseTime{
     @Column(nullable = true, name = "tags")
     private String tags;
 
-    @Column(nullable = false, name = "contact")
+    @Column(nullable = true, name = "contact")
     private Boolean contact;
 
     @Column(nullable = true, name = "class_name")
     private String className;
 
     @Column(nullable = true, name = "class_division")
-    private int classDivision;
+    private String classDivision;
 
 
     @Builder
-    public Posts(String author, String title, String content, String category, String requiredSkills, String tags, Boolean contact, String className, int classDivision) {
+    public Posts(String author, String title, String content, String category, String requiredSkills, String tags, Boolean contact, String className, String classDivision) {
         this.author = author;
         this.title = title;
         this.content = content;

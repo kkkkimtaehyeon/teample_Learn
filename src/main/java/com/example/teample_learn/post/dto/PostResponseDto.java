@@ -19,7 +19,7 @@ public class PostResponseDto {
     String tags;
     Boolean contact;
     String className;
-    int classDivision;
+    String classDivision;
 
     public PostResponseDto(Posts post) {
         this.id = post.getId();

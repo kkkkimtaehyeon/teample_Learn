@@ -1,11 +1,11 @@
 package com.example.teample_learn.post.dto;
 
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
-@Getter
+@Data
 public class PostUpdateRequestDto {
 
     String title;

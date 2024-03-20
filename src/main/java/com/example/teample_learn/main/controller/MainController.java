@@ -10,4 +10,9 @@ public class MainController {
     public String index() {
         return "index";
     }
+
+    @GetMapping("/post/create")
+    public String createForm() {
+        return "create_form";
+    }
 }
