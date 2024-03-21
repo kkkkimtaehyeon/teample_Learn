@@ -11,8 +11,5 @@ public class MainController {
         return "join_list";
     }
 
-    @GetMapping("/post/create")
-    public String createForm() {
-        return "create_form";
-    }
+
 }

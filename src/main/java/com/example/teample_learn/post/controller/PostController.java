@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 @RequiredArgsConstructor
 @RestController
@@ -33,6 +34,11 @@ public class PostController {
     @GetMapping("/post/{id}")
     public PostResponseDto view(@PathVariable("id") Long id) {
         return postService.findById(id);
+    }
+
+    @GetMapping("/post/create")
+    public ModelAndView createForm() {
+        return new ModelAndView("create_form");
     }
 
     @PostMapping("/post")

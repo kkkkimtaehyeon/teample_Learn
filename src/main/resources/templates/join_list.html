@@ -91,6 +91,9 @@
             <a href="#">개인</a>
             <a href="#">학교</a>
         </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <a href="/post/create" class="btn btn-primary me-md-2" type="button">팀플 만들기</a>
+        </div>
         <form class="d-flex justify-content-center mt-3" role="search">
             <input class="form-control me-2" type="search" placeholder="검색어를 입력해주세요." aria-label="Search" style="width: 15rem;">
             <button class="btn btn-outline-success" type="submit">검색</button>
@@ -108,14 +111,11 @@
 <script>
 window.onload = () => {
     getPosts();
-
-
 };
 
 function getPosts() {
-    axios.get('/post', {
-    })
-        .then(function (response, data) {
+    axios.get('/post')
+        .then(function (response) {
             console.log(response);
 
             const postContainer = document.getElementById('post-container');
