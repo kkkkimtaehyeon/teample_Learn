@@ -45,6 +45,7 @@ public class Posts extends BaseTime{
     private String tags;
 
     @Column(nullable = true, name = "contact")
+    @ColumnDefault("0")
     private Boolean contact;
 
     @Column(nullable = true, name = "class_name")

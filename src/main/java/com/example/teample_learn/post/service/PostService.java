@@ -1,20 +1,15 @@
 package com.example.teample_learn.post.service;
 
-import com.example.teample_learn.post.repo.PostRepository;
 import com.example.teample_learn.post.domain.Posts;
-import com.example.teample_learn.post.dto.PostSaveRequestDto;
 import com.example.teample_learn.post.dto.PostResponseDto;
+import com.example.teample_learn.post.dto.PostSaveRequestDto;
 import com.example.teample_learn.post.dto.PostUpdateRequestDto;
-import java.util.List;
+import com.example.teample_learn.post.repo.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @RequiredArgsConstructor
 @Service
@@ -26,12 +21,10 @@ public class PostService {
         return postRepository.save(requestDto.toEntity()).getId();
     }
 
-    public Page<PostResponseDto> getPage(int page) {
-        int pageSize = 10;
-        Page<Posts> postsPage = postRepository.findAll(PageRequest.of(page, pageSize, Sort.by(Direction.DESC, "id")));
+    public Page<PostResponseDto> getPage(Pageable pageable) {
+        Page<Posts> postsPage = postRepository.findAll(pageable);
 
         return postsPage.map(PostResponseDto::new);
-
     }
     public PostResponseDto findById(Long id) {
         Posts post = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시물이 없습니다" + id));

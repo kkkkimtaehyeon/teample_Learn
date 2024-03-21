@@ -8,7 +8,7 @@ public class MainController {
 
     @GetMapping("/")
     public String index() {
-        return "index";
+        return "join_list";
     }
 
     @GetMapping("/post/create")
