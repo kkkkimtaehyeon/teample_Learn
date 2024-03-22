@@ -30,6 +30,9 @@
         #post-container a:hover {
             color: cornflowerblue;
         }
+        .post-card:hover {
+            cursor: pointer;
+        }
 
     </style>
 </head>
@@ -132,9 +135,9 @@ function getPosts() {
                 console.log(item.author);
                 itemContainer += `
                 <div class="col">
-                    <div class="card border-2">
+                    <div class="card post-card border-2" onclick="location.href='/post/${item.id}'">
                         <div class="card-body">
-                            <h5 class="card-title" style="height: 8rem"><a href="/post/${item.id}">${item.title}</a></h5>
+                            <h5 class="card-title" style="height: 8rem">${item.title}</h5>
                             <hr class="border-2">
                             <p class="card-text">${item.author}</p>
                         </div>
