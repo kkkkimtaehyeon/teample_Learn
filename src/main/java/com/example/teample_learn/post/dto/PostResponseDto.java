@@ -12,27 +12,31 @@ public class PostResponseDto {
     String author;
     String title;
     String content;
-    String category;
-    int view;
-    int scrap;
-    String requiredSkills;
     String tags;
-    Boolean contact;
+    Boolean meeting;
+    String category;
     String className;
-    String classDivision;
+    int classDivision;
+    String deadline;
+    String duration;
+    int quota;
+    String skills;
+    String contact;
 
     public PostResponseDto(Posts post) {
         this.id = post.getId();
         this.author = post.getAuthor();
         this.title = post.getTitle();
         this.content = post.getContent();
-        this.category = post.getCategory();
-        this.view = post.getViewCount();
-        this.scrap = post.getScrapCount();
-        this.requiredSkills = post.getRequiredSkills();
         this.tags = post.getTags();
-        this.contact = post.getContact();
+        this.meeting = post.getMeeting();
+        this.category = post.getCategory();
         this.className = post.getClassName();
         this.classDivision = post.getClassDivision();
+        this.deadline = post.getDeadline();
+        this.duration = post.getDuration();
+        this.quota = post.getQuota();
+        this.skills = post.getSkills();
+        this.contact = post.getContact();
     }
 }
