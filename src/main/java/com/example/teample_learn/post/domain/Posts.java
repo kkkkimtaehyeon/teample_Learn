@@ -89,7 +89,6 @@ public class Posts extends BaseTime{
         this.quota = quota;
         this.skills = skills;
         this.contact = contact;
-
     }
 
     public void update(PostUpdateRequestDto requestDto) {

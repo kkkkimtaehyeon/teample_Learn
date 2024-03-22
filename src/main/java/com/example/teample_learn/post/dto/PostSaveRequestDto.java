@@ -13,24 +13,33 @@ public class PostSaveRequestDto {
     String author;
     String title;
     String content;
-    String category;
-    String requiredSkills;
     String tags;
-    Boolean contact;
+    Boolean meeting;
+    String category;
     String className;
-    String classDivision;
+    int classDivision;
+    String deadline;
+    String duration;
+    int quota;
+    String skills;
+    String contact;
 
     @Builder
-    public PostSaveRequestDto(String author, String title, String content, String category, String requiredSkills, String tags, Boolean contact, String className, String classDivision) {
+    public PostSaveRequestDto(String author, String title, String content, String tags, Boolean meeting, String category, String className,
+                 int classDivision, String deadline, String duration, int quota, String skills, String contact) {
         this.author = author;
         this.title = title;
         this.content = content;
-        this.category = category;
-        this.requiredSkills = requiredSkills;
         this.tags = tags;
-        this.contact = contact;
+        this.meeting = meeting;
+        this.category = category;
         this.className = className;
         this.classDivision = classDivision;
+        this.deadline = deadline;
+        this.duration = duration;
+        this.quota = quota;
+        this.skills = skills;
+        this.contact = contact;
     }
 
     public Posts toEntity() {
@@ -38,12 +47,16 @@ public class PostSaveRequestDto {
                 .author(author)
                 .title(title)
                 .content(content)
-                .category(category)
-                .requiredSkills(requiredSkills)
                 .tags(tags)
-                .contact(contact)
+                .meeting(meeting)
+                .category(category)
                 .className(className)
                 .classDivision(classDivision)
+                .deadline(deadline)
+                .duration(duration)
+                .quota(quota)
+                .skills(skills)
+                .contact(contact)
                 .build();
     }
 }
