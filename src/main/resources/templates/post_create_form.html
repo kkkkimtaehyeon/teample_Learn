@@ -16,6 +16,11 @@
                 width: 940px;
             }
         }
+        hr {
+            height: 2px; /* 높이 조정 */
+            background-color: lightgrey; /* 배경색 변경 */
+            border: none; /* 기본 테두리 제거 */
+        }
     </style>
 </head>
 <body>
@@ -64,16 +69,19 @@
         <div class="header mb-4">
             <h3 class="fw-bold">팀플레이 생성하기</h3>
             <h6 class="fw-bold text-secondary">새로운 팀플레이를 생성해 다양한 사람들과 협업해보세요</h6>
+
         </div>
+
         <hr>
-        <div class="footer">
+
+        <div class="footer mt-4">
             <form id="createForm">
                 <div class="row">
                     <div class="col">
-                        <div class="mb-5">
-                            <label for="select-category" class="form-label">카테고리</label>
+                        <div class="mb-4">
+                            <label for="select-category" class="form-label">팀플 분류</label>
                             <select class="form-select" name="category" id="select-category" aria-label="Default select example">
-                                <option selected>카테고리를 선택해주세요.</option>
+                                <option selected>팀플 분류를 선택해주세요.</option>
                                 <option value="uni">교내 팀플</option>
                                 <option value="private">개인 팀플</option>
                             </select>
@@ -92,11 +100,36 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="mb-4">
-                        <label for="tag" class="form-label">태그</label>
-                        <input type="text" class="form-control"  name="tags" id="tag" placeholder="띄어쓰기로 구분해서 태그를 입력해주세요.">
+
+                <div class="mb-4">
+                    <div class="row">
+                        <div class="col mb-4">
+                            <label for="quota" class="form-label">모집 인원</label>
+                            <input type="text" class="form-control"  name="quota" id="quota" placeholder="n명">
+                        </div>
+                        <div class="col mb-4">
+                            <label for="contact" class="form-label">연락 방법</label>
+                            <input type="text" class="form-control"  name="contact" id="contact" placeholder="오픈카톡">
+                        </div>
                     </div>
+                    <div class="row">
+                        <div class="col mb-4">
+                            <label for="deadline" class="form-label">모집 마감일</label>
+                            <input type="text" class="form-control"  name="deadline" id="deadline" placeholder="YY-MM-DD">
+                        </div>
+                        <div class="col mb-4">
+                            <label for="duration" class="form-label">예상 진행 기간</label>
+                            <input type="text" class="form-control"  name="duration" id="duration" placeholder="n개월">
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+
+
+
+
+
+                <div class="row">
                     <div class="mb-4">
                         <label for="title" class="form-label">제목</label>
                         <input type="text" class="form-control"  name="title" id="title" placeholder="제목을 입력해주세요.">
@@ -107,13 +140,13 @@
                     </div>
                     <div class="mb-4">
                         <label for="requiredSkill" class="form-label">요구 능력</label>
-                        <input type="text" class="form-control"  name="requiredSkills" id="requiredSkill" placeholder="띄어쓰기로 구분해서 필요한 능력을 입력해주세요.">
+                        <input type="text" class="form-control"  name="skills" id="requiredSkill" placeholder="띄어쓰기로 구분해서 필요한 능력을 입력해주세요.">
                     </div>
                 </div>
 
                 <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="contact" name="contact">
-                    <label class="form-check-label" for="contact">대면</label>
+                    <input class="form-check-input" type="checkbox" role="switch" id="meeting" name="contact">
+                    <label class="form-check-label" for="meeting">대면</label>
                 </div>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <a href="/" class="btn btn-outline-secondary me-md-2" id="cancelBtn" type="button">취소</a>
@@ -146,8 +179,8 @@
         const formData = new FormData(document.getElementById("createForm"));
 
         try {
-            const response = axios.post('/post', formData);
-            console.log(response);
+            const response = await axios.post('/post', formData);
+            console.log(response.data);
             window.location.href=`/post/${response}`;
         } catch (error) {
             console.error('Error submitting form:', error);
