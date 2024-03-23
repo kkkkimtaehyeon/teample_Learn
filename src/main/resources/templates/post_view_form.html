@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -69,10 +69,10 @@
 
                 <div class="row header mb-3">
                     <div class="mb-3">
-                        <h1 id="title">제목입니다.</h1>
+                        <h1 id="title" th:text="${post.title}">제목입니다.</h1>
                     </div>
                     <div class = "d-flex justify-content-between">
-                        <p id="author">유저정보</p>
+                        <p id="author" th:text="${post.author}">유저정보</p>
                         <button class="btn btn-primary" id="applyBtn">지원하기</button>
                     </div>
                 </div>
@@ -83,32 +83,38 @@
                     <div class="row mb-3">
                         <div class="col">
                             <label>팀플 분류</label>
-                            <span id="category"></span>
+                            <span id="category" th:text="${post.category}"></span>
                         </div>
                         <div class="col" id="quota">
-                            <label>모집인원</label>
+                            <label >모집인원</label>
+                            <span th:text="${post.quota}"></span>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col">
-                            요구 능력
+                            <label>연락 방법</label>
+                            <span th:text="${post.contact}"></span>
                         </div>
                         <div class="col" id="contact">
-                            <label>진행방식</label>
+                            <label>대면 여부</label>
+                            <span th:text="${post.meeting}"></span>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col" id="deadline">
                             <label>시작 예정</label>
+                            <span th:text="${post.deadline}"></span>
                         </div>
                         <div class="col" id="duration">
                             <label>예상 기간</label>
+                            <span th:text="${post.duration}"></span>
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col" id="skills">
                             <label>요구 능력</label>
+                            <span th:text="${post.skills}"></span>
                         </div>
                     </div>
 
@@ -117,7 +123,7 @@
                 <hr class="mb-5">
 
                 <div class="row body mb-5">
-                    <p>여기는 본문입니다.</p>
+                    <p th:text="${post.content}">여기는 본문입니다.</p>
                 </div>
 
                 <hr class="mb-5">

@@ -153,7 +153,7 @@ function getPosts() {
                 console.log(item.author);
                 itemContainer += `
                 <div class="col">
-                    <div class="card post-card border-2" onclick="location.href='/post/view/${item.id}'">
+                    <div class="card post-card border-2" onclick="location.href='/post/${item.id}'">
                         <div class="card-body">
                             <h5 class="card-title" style="height: 8rem">${item.title}</h5>
                             <hr class="border-2">
