@@ -1,9 +1,11 @@
 package com.example.teample_learn.post.controller;
 
+import com.example.teample_learn.config.auth.dto.SessionUser;
 import com.example.teample_learn.post.dto.PostResponseDto;
 import com.example.teample_learn.post.dto.PostSaveRequestDto;
 import com.example.teample_learn.post.dto.PostUpdateRequestDto;
 import com.example.teample_learn.post.service.PostService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,9 +20,10 @@ import org.springframework.web.servlet.ModelAndView;
 public class PostController {
 
     private final PostService postService;
+    private final HttpSession httpSession;
 
     @GetMapping("/post")
-    public Page<PostResponseDto> page(@PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.DESC)
+    public Page<PostResponseDto> page(@PageableDefault(page = 0, size = 20, sort = "id", direction = Direction.DESC)
                                       Pageable pageable) {
         return postService.getPage(pageable);
     }
@@ -50,11 +53,14 @@ public class PostController {
 
     @GetMapping("/post/create")
     public ModelAndView createForm() {
+
         return new ModelAndView("post_create_form");
     }
 
     @PostMapping("/post")
     public Long save(PostSaveRequestDto requestDto) {
+        /*SessionUser user = (SessionUser) httpSession.getAttribute("user");
+        requestDto.setAuthor(user.getName());//builder 사용불가?*/
         return postService.save(requestDto);
     }
 
