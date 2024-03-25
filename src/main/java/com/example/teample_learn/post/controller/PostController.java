@@ -1,6 +1,5 @@
 package com.example.teample_learn.post.controller;
 
-import com.example.teample_learn.config.auth.dto.SessionUser;
 import com.example.teample_learn.post.domain.Posts;
 import com.example.teample_learn.post.dto.PostResponseDto;
 import com.example.teample_learn.post.dto.PostSaveRequestDto;
@@ -17,8 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -57,9 +55,19 @@ public class PostController {
     }
 
     @PutMapping("/post/{id}")
-    public Long update(@PathVariable("id") Long id, @RequestBody PostUpdateRequestDto requestDto) {
+    public Long update(@PathVariable("id") Long id, PostUpdateRequestDto requestDto) {
         return postService.update(id, requestDto);
 
+    }
+    @GetMapping("/post/{id}/update")
+    public ModelAndView editForm(@PathVariable("id") Long id) {
+        PostResponseDto responseDto = postService.findById(id);
+
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("post", responseDto);
+        mav.setViewName("post_update_form");
+
+        return mav;
     }
 
     @DeleteMapping("/post/{id}")

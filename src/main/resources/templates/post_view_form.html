@@ -75,8 +75,17 @@
 
                 <div class="row header mb-3">
                     <div class="mb-3">
-                        <h1 id="title" th:text="${post.title}">제목입니다.</h1>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h1 id="title" th:text="${post.title}">제목입니다.</h1>
+                            <div>
+                                <button id="updateBtn" class="btn btn-primary">수정</button>
+                                <button id="deleteBtn" class="btn btn-primary">삭제</button>
+                            </div>
+                        </div>
                     </div>
+
+
+
                     <div class = "d-flex justify-content-between">
                         <p id="author" th:text="${post.author}">유저정보</p>
                         <button class="btn btn-primary" id="applyBtn">지원하기</button>
@@ -139,24 +148,31 @@
         </div>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script>
-            /*const id = window.location.pathname;
-            axios.get(`/post/${id}`)
-                .then(response => {
-                    const post = response.data.content;
-                    document.getElementById('title').innerText = post.title;
-                    document.getElementById('author').innerText = post.author;
-                    document.getElementById('category').innerText = post.category;
-                    document.getElementById('quota').innerText = post.quota;
-                    document.getElementById('contact').innerText = post.contact;
-                    document.getElementById('meeting').innerText = post.meeting;
-                    document.getElementById('deadline').innerText = post.deadline;
-                    document.getElementById('duration').innerText = post.duration;
-                    document.getElementById('skills').innerText = post.skills;
-                    document.getElementById('content').innerText = post.content;
-                })
-                .catch(error => {
-                    console.log(error);
-                })*/
+            const id = window.location.pathname;
+            const deleteBtn = document.getElementById('deleteBtn');
+            const updateBtn = document.getElementById('updateBtn');
+
+            deleteBtn.addEventListener('click', (e)=> {
+                e.preventDefault();
+                axios.delete(`http://localhost:8081/post/${id}`)
+                    .then(response => {
+                        window.location.href = '/';
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            });
+
+            updateBtn.addEventListener('click', ()=> {
+                axios.get(`/post/${id}/update`)
+                    .then(response => {
+                        console.log(response);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+            });
+
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>
