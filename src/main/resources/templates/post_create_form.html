@@ -126,9 +126,6 @@
                 </div>
 
 
-
-
-
                 <div class="row">
                     <div class="mb-4">
                         <label for="title" class="form-label">제목</label>
@@ -139,8 +136,8 @@
                         <textarea class="form-control"  name="content" id="content" style="height: 300px" placeholder="내용을 입력해주세요."></textarea>
                     </div>
                     <div class="mb-4">
-                        <label for="requiredSkill" class="form-label">요구 능력</label>
-                        <input type="text" class="form-control"  name="skills" id="requiredSkill" placeholder="띄어쓰기로 구분해서 필요한 능력을 입력해주세요.">
+                        <label for="skills" class="form-label">요구 능력</label>
+                        <input type="text" class="form-control"  name="skills" id="skills" placeholder="띄어쓰기로 구분해서 필요한 능력을 입력해주세요.">
                     </div>
                 </div>
 
@@ -177,9 +174,12 @@
     submitBtn.addEventListener('click', async (e) => {
         e.preventDefault();
         const formData = new FormData(document.getElementById("createForm"));
+        for (const [key, value] of formData.entries()) {
+            console.log("KEY: " + key + ", VALUE: " + value);
+        }
 
         try {
-            const response = await axios.post('/post', formData);
+            const response = await axios.post('/post',formData);
             console.log(response.data);
             const id = response.data;
             window.location.href = `/post/${id}`;

@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Builder;
+import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
@@ -38,8 +39,8 @@ public class Posts extends BaseTime{
     @Column(nullable = true, name = "tags")
     private String tags;
 
-    @Column(nullable = false, name = "meeting")
-    @ColumnDefault("0")
+    @Column(nullable = true, name = "meeting")
+    @ColumnDefault("false")
     private Boolean meeting;
 
     @Column(nullable = false, name = "category")
@@ -49,7 +50,8 @@ public class Posts extends BaseTime{
     private String className;
 
     @Column(nullable = true, name = "class_division")
-    private int classDivision;
+    @ColumnDefault("0")
+    private Integer classDivision;
 
     @Column(nullable = false, name = "deadline")
     private String deadline;
@@ -58,7 +60,8 @@ public class Posts extends BaseTime{
     private String duration;
 
     @Column(nullable = false, name = "quota")
-    private int quota;
+    @ColumnDefault("0")
+    private Integer quota;
 
     @Column(nullable = true, name = "skills")
     private String skills;
@@ -67,15 +70,9 @@ public class Posts extends BaseTime{
     private String contact;
 
 
-
-
-
-
-
-
     @Builder
     public Posts(String author, String title, String content, String tags, Boolean meeting, String category, String className,
-                 int classDivision, String deadline, String duration, int quota, String skills, String contact) {
+                 Integer classDivision, String deadline, String duration, Integer quota, String skills, String contact) {
         this.author = author;
         this.title = title;
         this.content = content;

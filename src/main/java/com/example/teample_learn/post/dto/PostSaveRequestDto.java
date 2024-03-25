@@ -5,9 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
-@Data
+@Setter
+@Getter
 public class PostSaveRequestDto {
 
     String author;
@@ -17,16 +19,16 @@ public class PostSaveRequestDto {
     Boolean meeting;
     String category;
     String className;
-    int classDivision;
+    Integer classDivision;
     String deadline;
     String duration;
-    int quota;
+    Integer quota;
     String skills;
     String contact;
 
     @Builder
     public PostSaveRequestDto(String author, String title, String content, String tags, Boolean meeting, String category, String className,
-                 int classDivision, String deadline, String duration, int quota, String skills, String contact) {
+                              Integer classDivision, String deadline, String duration, Integer quota, String skills, String contact) {
         this.author = author;
         this.title = title;
         this.content = content;

@@ -1,6 +1,7 @@
 package com.example.teample_learn.post.controller;
 
 import com.example.teample_learn.config.auth.dto.SessionUser;
+import com.example.teample_learn.post.domain.Posts;
 import com.example.teample_learn.post.dto.PostResponseDto;
 import com.example.teample_learn.post.dto.PostSaveRequestDto;
 import com.example.teample_learn.post.dto.PostUpdateRequestDto;
@@ -11,8 +12,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @RequiredArgsConstructor
@@ -36,21 +43,6 @@ public class PostController {
         return mav;
     }
 
-    /*@GetMapping("/post/{id}")
-    public PostResponseDto view(@PathVariable("id") Long id) {
-
-        return postService.findById(id);
-    }
-
-    @GetMapping("/post/view")
-    public ModelAndView getViewHtml() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("post_view_form");
-        return mav;
-    }*/
-
-
-
     @GetMapping("/post/create")
     public ModelAndView createForm() {
 
@@ -60,7 +52,7 @@ public class PostController {
     @PostMapping("/post")
     public Long save(PostSaveRequestDto requestDto) {
         /*SessionUser user = (SessionUser) httpSession.getAttribute("user");
-        requestDto.setAuthor(user.getName());//builder 사용불가?*/
+        requestDto.setAuthor(user.getName());*/
         return postService.save(requestDto);
     }
 

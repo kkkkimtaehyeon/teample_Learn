@@ -16,10 +16,10 @@ public class PostResponseDto {
     Boolean meeting;
     String category;
     String className;
-    int classDivision;
+    Integer classDivision;
     String deadline;
     String duration;
-    int quota;
+    Integer quota;
     String skills;
     String contact;
 
