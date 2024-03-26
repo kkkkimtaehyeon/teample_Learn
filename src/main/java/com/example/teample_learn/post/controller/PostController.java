@@ -1,6 +1,5 @@
 package com.example.teample_learn.post.controller;
 
-import com.example.teample_learn.post.domain.Posts;
 import com.example.teample_learn.post.dto.PostResponseDto;
 import com.example.teample_learn.post.dto.PostSaveRequestDto;
 import com.example.teample_learn.post.dto.PostUpdateRequestDto;
@@ -21,67 +20,68 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @RequiredArgsConstructor
+@RequestMapping("/teamplay")
 @RestController
 public class PostController {
 
     private final PostService postService;
     private final HttpSession httpSession;
 
-    @GetMapping("/post")
+    @GetMapping
     public Page<PostResponseDto> page(@PageableDefault(page = 0, size = 20, sort = "id", direction = Direction.DESC)
                                       Pageable pageable) {
         return postService.getPage(pageable);
     }
-    @GetMapping("/post/{id}")
+    @GetMapping("/{id}")
     public ModelAndView view(@PathVariable("id") Long id) {
 
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("post_view_form");
+        mav.setViewName("teamplay_view_form");
         mav.addObject("post", postService.findById(id));
         return mav;
     }
 
-    @GetMapping("/post/create")
+    @GetMapping("/create")
     public ModelAndView createForm() {
 
-        return new ModelAndView("post_create_form");
+        return new ModelAndView("teamplay_create_form");
     }
 
-    @PostMapping("/post")
+    @PostMapping
     public Long save(PostSaveRequestDto requestDto) {
         /*SessionUser user = (SessionUser) httpSession.getAttribute("user");
         requestDto.setAuthor(user.getName());*/
         return postService.save(requestDto);
     }
 
-    @GetMapping("/post/{id}/update")
+    @GetMapping("/{id}/edit")
     public ModelAndView editForm(@PathVariable("id") Long id) {
         PostResponseDto responseDto = postService.findById(id);
 
         ModelAndView mav = new ModelAndView();
         mav.addObject("post", responseDto);
         mav.addObject("id",id);
-        mav.setViewName("post_update_form");
+        mav.setViewName("teamplay_edit_form");
 
         return mav;
     }
 
-    @PutMapping("/post/{id}")
+    @PutMapping("/{id}")
     public Long update(@PathVariable("id") Long id, PostUpdateRequestDto requestDto) {
         return postService.update(id, requestDto);
     }
 
-    @DeleteMapping("/post/{id}")
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") Long id) {
         postService.delete(id);
     }
 
-    @PostMapping("/post/{id}/scrap")
+    @PostMapping("{id}/scrap")
     public Long addScrap(@PathVariable("id") Long id) {
         return postService.addScrap(id);
     }
 
-    @DeleteMapping("/post/{id}/scrap")
+    @DeleteMapping("/{id}/scrap")
     public Long subScrap(@PathVariable("id") Long id) {
         return postService.subScrap(id);
     }
