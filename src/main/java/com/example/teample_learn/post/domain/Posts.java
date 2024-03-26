@@ -91,7 +91,16 @@ public class Posts extends BaseTime{
     public void update(PostUpdateRequestDto requestDto) {
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
+        this.tags = requestDto.getTags();
+        this.meeting = requestDto.getMeeting();
         this.category = requestDto.getCategory();
+        this.className = requestDto.getClassName();;
+        this.classDivision = requestDto.getClassDivision();
+        this.deadline = requestDto.getDeadline();
+        this.duration = requestDto.getDuration();
+        this.quota = requestDto.getQuota();
+        this.skills = requestDto.getSkills();
+        this.contact = requestDto.getContact();
     }
 
     public void addViewCount() {

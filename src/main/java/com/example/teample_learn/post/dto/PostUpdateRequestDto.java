@@ -8,24 +8,22 @@ import lombok.NoArgsConstructor;
 @Data
 public class PostUpdateRequestDto {
 
-    String author;
     String title;
     String content;
     String tags;
     Boolean meeting;
     String category;
     String className;
-    int classDivision;
+    Integer classDivision;
     String deadline;
     String duration;
-    int quota;
+    Integer quota;
     String skills;
     String contact;
 
     @Builder
     public PostUpdateRequestDto(String title, String content, String tags, Boolean meeting, String category, String className,
-                              int classDivision, String deadline, String duration, int quota, String skills, String contact) {
-        this.author = author;
+                              Integer classDivision, String deadline, String duration, Integer quota, String skills, String contact) {
         this.title = title;
         this.content = content;
         this.tags = tags;

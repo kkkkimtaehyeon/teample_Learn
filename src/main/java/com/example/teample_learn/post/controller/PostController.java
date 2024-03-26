@@ -54,20 +54,21 @@ public class PostController {
         return postService.save(requestDto);
     }
 
-    @PutMapping("/post/{id}")
-    public Long update(@PathVariable("id") Long id, PostUpdateRequestDto requestDto) {
-        return postService.update(id, requestDto);
-
-    }
     @GetMapping("/post/{id}/update")
     public ModelAndView editForm(@PathVariable("id") Long id) {
         PostResponseDto responseDto = postService.findById(id);
 
         ModelAndView mav = new ModelAndView();
         mav.addObject("post", responseDto);
+        mav.addObject("id",id);
         mav.setViewName("post_update_form");
 
         return mav;
+    }
+
+    @PutMapping("/post/{id}")
+    public Long update(@PathVariable("id") Long id, PostUpdateRequestDto requestDto) {
+        return postService.update(id, requestDto);
     }
 
     @DeleteMapping("/post/{id}")

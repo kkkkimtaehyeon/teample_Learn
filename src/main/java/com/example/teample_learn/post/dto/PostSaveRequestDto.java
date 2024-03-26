@@ -8,8 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @NoArgsConstructor
-@Setter
-@Getter
+@Data
 public class PostSaveRequestDto {
 
     String author;
