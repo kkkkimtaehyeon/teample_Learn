@@ -73,10 +73,39 @@
                         <a href="/logout" class="nav-link">로그아웃</a>
                     </li>
                 </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                <div class="toggles">
+                    <div class="btn-group">
+                        <button type="button" id="apply-list" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                            지원한 팀플
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-lg-end">
+                            <li><button class="dropdown-item" type="button">Action</button></li>
+                            <li><button class="dropdown-item" type="button">Another action</button></li>
+                            <li><button class="dropdown-item" type="button">Something else here</button></li>
+                        </ul>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" id="notice" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                            알림
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-lg-end">
+                            <li><button class="dropdown-item" type="button">Action</button></li>
+                            <li><button class="dropdown-item" type="button">Another action</button></li>
+                            <li><button class="dropdown-item" type="button">Something else here</button></li>
+                        </ul>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" id="profile" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                            프로필
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-lg-end">
+                            <li><button class="dropdown-item" type="button">내정보</button></li>
+                            <li><button class="dropdown-item" type="button">글관리</button></li>
+                            <li><a href="/user/resume/create" class="dropdown-item" >PR관리</a></li>
+                        </ul>
+                    </div>
+                </div>
+
             </div>
         </div>
     </nav>
