@@ -1,12 +1,10 @@
-package com.example.teample_learn.post.dto;
+package com.example.teample_learn.teamplay.dto;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Data
-public class PostUpdateRequestDto {
+public class TeamplayUpdateRequestDto {
 
     String title;
     String content;
@@ -22,8 +20,8 @@ public class PostUpdateRequestDto {
     String contact;
 
     @Builder
-    public PostUpdateRequestDto(String title, String content, String tags, Boolean meeting, String category, String className,
-                              Integer classDivision, String deadline, String duration, Integer quota, String skills, String contact) {
+    public TeamplayUpdateRequestDto(String title, String content, String tags, Boolean meeting, String category, String className,
+                                    Integer classDivision, String deadline, String duration, Integer quota, String skills, String contact) {
         this.title = title;
         this.content = content;
         this.tags = tags;

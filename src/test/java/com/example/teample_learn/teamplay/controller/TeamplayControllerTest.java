@@ -1,12 +1,12 @@
-package com.example.teample_learn.post.controller;
+package com.example.teample_learn.teamplay.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.teample_learn.post.domain.Posts;
-import com.example.teample_learn.post.dto.PostResponseDto;
-import com.example.teample_learn.post.dto.PostSaveRequestDto;
-import com.example.teample_learn.post.dto.PostUpdateRequestDto;
-import com.example.teample_learn.post.repo.PostRepository;
+import com.example.teample_learn.teamplay.domain.Posts;
+import com.example.teample_learn.teamplay.dto.TeamplayResponseDto;
+import com.example.teample_learn.teamplay.dto.TeamplaySaveRequestDto;
+import com.example.teample_learn.teamplay.dto.TeamplayUpdateRequestDto;
+import com.example.teample_learn.teamplay.repo.TeamplayRepository;
 import java.util.List;
 import org.junit.After;
 import org.junit.Test;
@@ -24,7 +24,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class PostControllerTest {
+public class TeamplayControllerTest {
 
     @LocalServerPort
     private int port;
@@ -33,7 +33,7 @@ public class PostControllerTest {
     private TestRestTemplate restTemplate;
 
     @Autowired
-    private PostRepository postRepository;
+    private TeamplayRepository teamplayRepository;
 
    static String author = "작성자";
    static String title = "제목";
@@ -43,7 +43,7 @@ public class PostControllerTest {
 
     @After
     public void cleanUp() {
-        postRepository.deleteAll();
+        teamplayRepository.deleteAll();
     }
 
     @Test
@@ -53,7 +53,7 @@ public class PostControllerTest {
     @Test
     public void Posts_조회한다() {
 
-        PostSaveRequestDto requestDto = PostSaveRequestDto.builder()
+        TeamplaySaveRequestDto requestDto = TeamplaySaveRequestDto.builder()
                 .author(author)
                 .title(title)
                 .content(content)
@@ -61,15 +61,15 @@ public class PostControllerTest {
                 .contact(contact)
                 .build();
 
-        Long postId = postRepository.save(requestDto.toEntity()).getId();
+        Long postId = teamplayRepository.save(requestDto.toEntity()).getId();
 
         String url = "http://localhost:" + port + "/post/" + postId;
 
-        ResponseEntity<PostResponseDto> responseEntity = restTemplate.getForEntity(url, PostResponseDto.class);
+        ResponseEntity<TeamplayResponseDto> responseEntity = restTemplate.getForEntity(url, TeamplayResponseDto.class);
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
 
-        Posts posts = postRepository.findById(postId).get();
+        Posts posts = teamplayRepository.findById(postId).get();
 
         assertThat(posts.getAuthor()).isEqualTo(author);
         assertThat(posts.getTitle()).isEqualTo(title);
@@ -82,7 +82,7 @@ public class PostControllerTest {
     @Test
     public void Posts_등록된다() {
 
-        PostSaveRequestDto requestDto = PostSaveRequestDto.builder()
+        TeamplaySaveRequestDto requestDto = TeamplaySaveRequestDto.builder()
                 .author(author)
                 .title(title)
                 .content(content)
@@ -97,7 +97,7 @@ public class PostControllerTest {
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(responseEntity.getBody()).isGreaterThan(0L);
 
-        List<Posts> postList = postRepository.findAll();
+        List<Posts> postList = teamplayRepository.findAll();
 
         Posts posts = postList.get(0);
         assertThat(posts.getAuthor()).isEqualTo(author);
@@ -117,14 +117,14 @@ public class PostControllerTest {
                 .contact(contact)
                 .build();
 
-        Long postId = postRepository.save(savedPost).getId();
+        Long postId = teamplayRepository.save(savedPost).getId();
 
         String expectedTitle = "title1";
         String expectedContent = "content1";
         String expectedCategory = "category1";
         Boolean expectedContact = false;
 
-        PostUpdateRequestDto requestDto = PostUpdateRequestDto.builder()
+        TeamplayUpdateRequestDto requestDto = TeamplayUpdateRequestDto.builder()
                 .title(expectedTitle)
                 .content(expectedContent)
                 .category(expectedCategory)
@@ -137,14 +137,14 @@ public class PostControllerTest {
         String url = "http://localhost:" + port + "/post/" + postId;
 
         //json 형식으로 http 요청을 전송
-        HttpEntity<PostUpdateRequestDto> requestEntity = new HttpEntity<>(requestDto);
+        HttpEntity<TeamplayUpdateRequestDto> requestEntity = new HttpEntity<>(requestDto);
 
         ResponseEntity<Long> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, requestEntity, Long.class);
 
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(responseEntity.getBody()).isGreaterThan(0L);
 
-        List<Posts> postList = postRepository.findAll();
+        List<Posts> postList = teamplayRepository.findAll();
 
         Posts posts = postList.get(0);
         assertThat(posts.getAuthor()).isEqualTo("작성자");
@@ -164,13 +164,13 @@ public class PostControllerTest {
                 .contact(contact)
                 .build();
 
-        Long postId = postRepository.save(savedPost).getId();
+        Long postId = teamplayRepository.save(savedPost).getId();
         String url = "http://localhost:" + port + "/post/" + postId;
 
-        assertThat(postRepository.count()).isEqualTo(1);
+        assertThat(teamplayRepository.count()).isEqualTo(1);
 
         restTemplate.delete(url);
-        assertThat(postRepository.count()).isEqualTo(0);
+        assertThat(teamplayRepository.count()).isEqualTo(0);
     }
 
 

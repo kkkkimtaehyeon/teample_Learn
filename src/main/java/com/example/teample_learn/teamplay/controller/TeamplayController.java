@@ -1,9 +1,9 @@
-package com.example.teample_learn.post.controller;
+package com.example.teample_learn.teamplay.controller;
 
-import com.example.teample_learn.post.dto.PostResponseDto;
-import com.example.teample_learn.post.dto.PostSaveRequestDto;
-import com.example.teample_learn.post.dto.PostUpdateRequestDto;
-import com.example.teample_learn.post.service.PostService;
+import com.example.teample_learn.teamplay.dto.TeamplayResponseDto;
+import com.example.teample_learn.teamplay.dto.TeamplaySaveRequestDto;
+import com.example.teample_learn.teamplay.dto.TeamplayUpdateRequestDto;
+import com.example.teample_learn.teamplay.service.TeamplayService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -22,22 +22,22 @@ import org.springframework.web.servlet.ModelAndView;
 @RequiredArgsConstructor
 @RequestMapping("/teamplay")
 @RestController
-public class PostController {
+public class TeamplayController {
 
-    private final PostService postService;
+    private final TeamplayService teamplayService;
     private final HttpSession httpSession;
 
     @GetMapping
-    public Page<PostResponseDto> page(@PageableDefault(page = 0, size = 20, sort = "id", direction = Direction.DESC)
+    public Page<TeamplayResponseDto> page(@PageableDefault(page = 0, size = 20, sort = "id", direction = Direction.DESC)
                                       Pageable pageable) {
-        return postService.getPage(pageable);
+        return teamplayService.getPage(pageable);
     }
     @GetMapping("/{id}")
     public ModelAndView view(@PathVariable("id") Long id) {
 
         ModelAndView mav = new ModelAndView();
         mav.setViewName("teamplay_view_form");
-        mav.addObject("post", postService.findById(id));
+        mav.addObject("post", teamplayService.findById(id));
         return mav;
     }
 
@@ -48,15 +48,15 @@ public class PostController {
     }
 
     @PostMapping
-    public Long save(PostSaveRequestDto requestDto) {
+    public Long save(TeamplaySaveRequestDto requestDto) {
         /*SessionUser user = (SessionUser) httpSession.getAttribute("user");
         requestDto.setAuthor(user.getName());*/
-        return postService.save(requestDto);
+        return teamplayService.save(requestDto);
     }
 
     @GetMapping("/{id}/edit")
     public ModelAndView editForm(@PathVariable("id") Long id) {
-        PostResponseDto responseDto = postService.findById(id);
+        TeamplayResponseDto responseDto = teamplayService.findById(id);
 
         ModelAndView mav = new ModelAndView();
         mav.addObject("post", responseDto);
@@ -67,22 +67,22 @@ public class PostController {
     }
 
     @PutMapping("/{id}")
-    public Long update(@PathVariable("id") Long id, PostUpdateRequestDto requestDto) {
-        return postService.update(id, requestDto);
+    public Long update(@PathVariable("id") Long id, TeamplayUpdateRequestDto requestDto) {
+        return teamplayService.update(id, requestDto);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") Long id) {
-        postService.delete(id);
+        teamplayService.delete(id);
     }
 
     @PostMapping("{id}/scrap")
     public Long addScrap(@PathVariable("id") Long id) {
-        return postService.addScrap(id);
+        return teamplayService.addScrap(id);
     }
 
     @DeleteMapping("/{id}/scrap")
     public Long subScrap(@PathVariable("id") Long id) {
-        return postService.subScrap(id);
+        return teamplayService.subScrap(id);
     }
 }

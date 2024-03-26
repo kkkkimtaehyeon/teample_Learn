@@ -1,4 +1,4 @@
-package com.example.teample_learn.post.service;
+package com.example.teample_learn.teamplay.service;
 
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +7,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class PostServiceTest {
+public class TeamplayServiceTest {
 
     @Autowired
-    PostService postService;
+    TeamplayService teamplayService;
 }

@@ -1,4 +1,4 @@
-package com.example.teample_learn.post.domain;
+package com.example.teample_learn.teamplay.domain;
 
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;

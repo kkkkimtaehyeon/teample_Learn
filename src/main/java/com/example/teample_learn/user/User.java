@@ -1,6 +1,6 @@
 package com.example.teample_learn.user;
 
-import com.example.teample_learn.post.domain.BaseTime;
+import com.example.teample_learn.teamplay.domain.BaseTime;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

@@ -1,15 +1,13 @@
-package com.example.teample_learn.post.dto;
+package com.example.teample_learn.teamplay.dto;
 
-import com.example.teample_learn.post.domain.Posts;
+import com.example.teample_learn.teamplay.domain.Posts;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @NoArgsConstructor
 @Data
-public class PostSaveRequestDto {
+public class TeamplaySaveRequestDto {
 
     String author;
     String title;
@@ -26,8 +24,8 @@ public class PostSaveRequestDto {
     String contact;
 
     @Builder
-    public PostSaveRequestDto(String author, String title, String content, String tags, Boolean meeting, String category, String className,
-                              Integer classDivision, String deadline, String duration, Integer quota, String skills, String contact) {
+    public TeamplaySaveRequestDto(String author, String title, String content, String tags, Boolean meeting, String category, String className,
+                                  Integer classDivision, String deadline, String duration, Integer quota, String skills, String contact) {
         this.author = author;
         this.title = title;
         this.content = content;

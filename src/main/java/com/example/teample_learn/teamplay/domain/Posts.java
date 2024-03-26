@@ -1,13 +1,12 @@
-package com.example.teample_learn.post.domain;
+package com.example.teample_learn.teamplay.domain;
 
-import com.example.teample_learn.post.dto.PostUpdateRequestDto;
+import com.example.teample_learn.teamplay.dto.TeamplayUpdateRequestDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Builder;
-import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
@@ -88,7 +87,7 @@ public class Posts extends BaseTime{
         this.contact = contact;
     }
 
-    public void update(PostUpdateRequestDto requestDto) {
+    public void update(TeamplayUpdateRequestDto requestDto) {
         this.title = requestDto.getTitle();
         this.content = requestDto.getContent();
         this.tags = requestDto.getTags();

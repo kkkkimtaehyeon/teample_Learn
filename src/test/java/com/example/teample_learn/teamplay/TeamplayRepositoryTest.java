@@ -1,9 +1,9 @@
-package com.example.teample_learn.post;
+package com.example.teample_learn.teamplay;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.teample_learn.post.domain.Posts;
-import com.example.teample_learn.post.repo.PostRepository;
+import com.example.teample_learn.teamplay.domain.Posts;
+import com.example.teample_learn.teamplay.repo.TeamplayRepository;
 import java.util.List;
 import org.aspectj.lang.annotation.After;
 import org.junit.Test;
@@ -14,14 +14,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class PostRepositoryTest  {
+public class TeamplayRepositoryTest {
 
     @Autowired
-    PostRepository postRepository;
+    TeamplayRepository teamplayRepository;
 
     @After("sdf")
     public void cleanUp() {
-        postRepository.deleteAll();
+        teamplayRepository.deleteAll();
     }
 
     @Test
@@ -31,7 +31,7 @@ public class PostRepositoryTest  {
         String content = "내용";
         String category = "개발";
 
-        postRepository.save(
+        teamplayRepository.save(
                 Posts.builder()
                         .author(author)
                         .content(content)
@@ -40,7 +40,7 @@ public class PostRepositoryTest  {
                 .build()
         );
 
-        List<Posts> postList = postRepository.findAll();
+        List<Posts> postList = teamplayRepository.findAll();
 
         Posts posts = postList.get(0);
         assertThat(posts.getAuthor()).isEqualTo(author);
