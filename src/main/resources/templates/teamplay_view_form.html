@@ -141,20 +141,72 @@
                     <p id="content" th:text="${post.content}">여기는 본문입니다.</p>
                 </div>
 
-                <hr class="mb-5">
+                <button type="button" class="btn btn-outline-primary">
+                    추천 <span class="badge text-bg-primary">4</span>
+                </button>
 
+                <hr class="mb-5">
             </div>
+
+            <form id="comment-create-form">
+                <div class="card mb-5">
+                    <div class="card-header d-flex justify-content-end">
+                        <button id="comment-sumbitBtn" class="btn btn-primary">댓글 작성</button>
+                    </div>
+                    <div class="card-body" style="padding-left: 50px; padding-right: 50px">
+                        <input type="text" class="form-control" id="comment-content" name="content" style="height: 80px" placeholder="궁금한 점을 댓글로 이야기해보세요.">
+                    </div>
+                </div>
+            </form>
+
+            <div id="comment-container">
+
+                <div class="col">
+                    <div class="header row mb-2 " >
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <p class="user">글쓴이</p>
+                            </div>
+                            <div>
+                                <div class="btn-group dropstart">
+                                    <a type="button"  class="fs-5" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none">
+                                        ...
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><button id="comment-updateBtn" class="dropdown-item">수정</button></li>
+                                        <li><button id="comment-deleteBtn" class="dropdown-item">삭제</button></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="footer row">
+                        <p class="comment">내용</p>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+
 
         </div>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <script>
-            const id = window.location.pathname;
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            const id = [[${id}]];
             const deleteBtn = document.getElementById('deleteBtn');
             const updateBtn = document.getElementById('updateBtn');
+            const commentSubmitBtn = document.getElementById('comment-sumbitBtn');
+            const commentUpdateBtn = document.getElementById('comment-updateBtn');
+            const commentDeleteBtn = document.getElementById('comment-deleteBtn');
+
+            window.onload=()=> {
+                getComments();
+            };
 
             deleteBtn.addEventListener('click', (e)=> {
                 e.preventDefault();
-                axios.delete(`${id}`)
+                axios.delete(`/teamplay/${id}`)
                     .then(response => {
                         window.location.href = '/';
                     })
@@ -164,9 +216,77 @@
             });
 
             updateBtn.addEventListener('click', ()=> {
-                window.location.href=`${id}/edit`
+                window.location.href=`/teamplay/${id}/edit`
             });
 
+            commentSubmitBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                let comment = document.getElementById('comment-content').value;
+                const commentData = {
+                    'content' : comment
+                };
+
+               axios.post(`/teamplay/${id}/comment`, commentData)
+                   .then(response => {
+                       console.log('댓글작성 성공', response);
+                       getComments();
+                   })
+                   .catch(error => {
+                       console.log('댓글작성 실패', error);
+                   })
+            });
+
+            function getComments() {
+                const commentContainer = document.getElementById('comment-container');
+
+                axios.get(`/teamplay/${id}/comment`)
+                    .then(response => {
+                        let tempContainer = '';
+                        let element = '';
+                        for(let comment of response.data) {
+                            element= `
+                                <div class="col">
+                                    <div class="header row mb-2 " >
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                <p class="user">글쓴이</p>
+                                            </div>
+                                            <div>
+                                                <div class="btn-group dropstart">
+                                                    <a type="button"  class="fs-5" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none">
+                                                        ...
+                                                    </a>
+                                                    <ul class="dropdown-menu">
+                                                        <li><button id="comment-updateBtn" class="dropdown-item">수정</button></li>
+                                                        <li><button id="comment-deleteBtn" class="dropdown-item">삭제</button></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="footer row">
+                                        <p class="comment">${comment.content}</p>
+                                    </div>
+                                    <hr>
+                                </div>
+                            `
+                            element.id = comment.id;
+                            tempContainer += element;
+                        }
+
+                        commentContainer.innerHTML = tempContainer;
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+            }
+
+            commentDeleteBtn.addEventListener('click', () => {
+               axios.delete(`/teamplay/${id}/comment/`)
+            });
+
+            /*]]>*/
         </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     </body>
