@@ -1,10 +1,14 @@
 package com.example.teample_learn.comment.service;
 
+import com.example.teample_learn.comment.domain.Comment;
+import com.example.teample_learn.comment.dto.CommentResponseDto;
 import com.example.teample_learn.comment.dto.CommentSaveRequestDto;
 import com.example.teample_learn.comment.repo.CommentRepository;
 import com.example.teample_learn.teamplay.domain.Posts;
 import com.example.teample_learn.teamplay.repo.TeamplayRepository;
 import com.example.teample_learn.user.UserRepository;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +20,21 @@ public class CommentService {
     private final UserRepository userRepository;
     private final TeamplayRepository teamplayRepository;
     public Long save(Long id, CommentSaveRequestDto requestDto) {
-        Posts posts = teamplayRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 유저를 찾을 수 없습니다"));
+        Posts posts = teamplayRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시물을 찾을 수 없습니다"));
         requestDto.setPosts(posts);
 
         return commentRepository.save(requestDto.toEntity()).getId();
+    }
+
+    public List<CommentResponseDto> getComments(Long id) {
+        Posts posts = teamplayRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시물을 찾을 수 없습니다"));
+        List<Comment> comments = commentRepository.findByPostsOrderByIdDesc(posts);
+        List<CommentResponseDto> responseDtos = new ArrayList<>();
+
+        for(Comment comment: comments) {
+            responseDtos.add(new CommentResponseDto(comment));
+        }
+
+        return responseDtos;
     }
 }
