@@ -3,6 +3,7 @@ package com.example.teample_learn.comment.dto;
 import com.example.teample_learn.comment.domain.Comment;
 import com.example.teample_learn.teamplay.domain.Posts;
 import com.example.teample_learn.user.User;
+import jakarta.annotation.Nullable;
 import lombok.Builder;
 import lombok.Data;
 
@@ -23,7 +24,5 @@ public class CommentSaveRequestDto {
                 .content(content)
                 .posts(posts)
                 .build();
-
-
     }
 }

@@ -37,6 +37,7 @@ public class TeamplayController {
 
         ModelAndView mav = new ModelAndView();
         mav.setViewName("teamplay_view_form");
+        mav.addObject("id", id);
         mav.addObject("post", teamplayService.findById(id));
         return mav;
     }

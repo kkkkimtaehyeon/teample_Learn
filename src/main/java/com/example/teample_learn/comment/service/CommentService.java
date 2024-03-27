@@ -4,7 +4,6 @@ import com.example.teample_learn.comment.dto.CommentSaveRequestDto;
 import com.example.teample_learn.comment.repo.CommentRepository;
 import com.example.teample_learn.teamplay.domain.Posts;
 import com.example.teample_learn.teamplay.repo.TeamplayRepository;
-import com.example.teample_learn.user.User;
 import com.example.teample_learn.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
