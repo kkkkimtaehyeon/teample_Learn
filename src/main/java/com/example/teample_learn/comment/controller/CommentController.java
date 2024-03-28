@@ -5,6 +5,7 @@ import com.example.teample_learn.comment.dto.CommentSaveRequestDto;
 import com.example.teample_learn.comment.service.CommentService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,4 +28,11 @@ public class CommentController {
     public Long saveComment(@PathVariable("id") Long id, @RequestBody CommentSaveRequestDto requestDto) {//유저 정보 추가 필요
         return commentService.save(id, requestDto);
     }
+
+    @DeleteMapping("/comment/{commentId}")
+    public void deleteComment(@PathVariable("commentId") Long commentId) {
+        commentService.delete(commentId);
+    }
+
+
 }

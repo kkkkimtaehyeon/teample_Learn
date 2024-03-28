@@ -258,7 +258,7 @@
                                                     </a>
                                                     <ul class="dropdown-menu">
                                                         <li><button id="comment-updateBtn" class="dropdown-item">수정</button></li>
-                                                        <li><button id="comment-deleteBtn" class="dropdown-item">삭제</button></li>
+                                                        <li><button id="comment-deleteBtn" class="dropdown-item" onclick="deleteComment(${comment.id})">삭제</button></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -282,9 +282,16 @@
                     })
             }
 
-            commentDeleteBtn.addEventListener('click', () => {
-               axios.delete(`/teamplay/${id}/comment/`)
-            });
+            function deleteComment(commentId) {
+                axios.delete(`/teamplay/${id}/comment/${commentId}`)
+                    .then(response => {
+                        console.log('댓글 삭제 성공', response);
+                        getComments();
+                    })
+                    .catch(error => {
+                        console.log('댓글 삭제 실패', error);
+                    });
+            }
 
             /*]]>*/
         </script>

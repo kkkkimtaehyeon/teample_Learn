@@ -37,4 +37,12 @@ public class CommentService {
 
         return responseDtos;
     }
+
+    public void delete(Long commentId) {
+        // post마다 저장되는 댓글 id은 전체 순서? 아니면 포스트마다 인덱스가 1부터 시작?
+        // Posts posts = teamplayRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시물을 찾을 수 없습니다"));
+        Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new IllegalArgumentException("해당 댓글을 찾을 수 없습니다"));
+
+        commentRepository.delete(comment);
+    }
 }

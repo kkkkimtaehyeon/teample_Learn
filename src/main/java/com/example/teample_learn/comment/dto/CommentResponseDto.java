@@ -9,10 +9,12 @@ import lombok.Data;
 public class CommentResponseDto {
 
     String content;
+    Long id;
     //User user
 
     public CommentResponseDto(Comment comment) {
         this.content = comment.getContent();
+        this.id = comment.getId();
         //this.user = comment.getUser();
     }
 }
