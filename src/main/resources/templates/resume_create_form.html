@@ -65,77 +65,75 @@
 </div>
 
 <div class="container w-70">
-    <div class="card p-3">
-        <div class="header mb-4">
-            <h3 class="fw-bold">PR 생성하기</h3>
-            <h6 class="fw-bold text-secondary">새로운 PR을 생성해 다양한 사람들과 협업해보세요</h6>
+    <div class="card">
+        <div class="card-body">
 
-        </div>
+            <div class="resume-title card-title mb-5">
+                <h1>한줄 소개 제목입니다.</h1>
+            </div>
 
-        <hr>
+            <hr>
 
-        <div class="footer mt-4">
-            <form id="createForm">
-                <div class="row">
-                    <div class="col">
-                        <div class="mb-4">
-                            <label for="phone" class="form-label">연락처</label>
-                            <input type="text" class="form-control"  name="phone" id="phone" placeholder="010-0000-0000">
+            <div class="resume-info row gap-3 mt-3">
+                <div class="col">
+                    <div class="row mb-3">
+                        <label for="name">이름</label>
+                        <div>
+                            <input type="text" class="form-control" id="name">
                         </div>
                     </div>
-                    <div class="col uni-option">
-                        <div class="row">
-                            <div class="col mb-4">
-                                <label for="location" class="form-label">지역</label>
-                                <input type="text" class="form-control"  name="location" id="location" placeholder="활동 지역">
-                            </div>
-                            <div class="col">
-                                <label for="workspace" class="form-label">직장/학교</label>
-                                <input type="text" class="form-control"  name="workspace" id="workspace" placeholder="직장/학교">
-                            </div>
+                    <div class="row mb-3">
+                        <label for="phone">연락처</label>
+                        <div>
+                            <input type="text" class="form-control" id="phone" placeholder="010-xxxx-xxxx">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="email">email</label>
+                        <div>
+                            <input type="email" class="form-control" id="email" placeholder="test@naver.com">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="location">location</label>
+                        <div>
+                            <input type="text" class="form-control" id="location" placeholder="활동지역">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="work">work at</label>
+                        <div>
+                            <input type="text" class="form-control" id="work" placeholder="직장/학교">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="portfolios">portfolios</label>
+                        <div>
+                            <input type="text" class="form-control" id="portfolios" placeholder="링크를 입력해주세요.">
                         </div>
                     </div>
                 </div>
-
-                <div class="mb-4">
-                    <div class="row">
-
-                        <div class="col mb-4" >
-                            <label for="email" class="form-label">이메일</label>
-                            <input type="text" class="form-control" name="email" id="email" placeholder="yourEmail@gmail.com">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col mb-4">
-                            <label for="deadline" class="form-label">포트폴리오 링크</label>
-                            <input type="text" class="form-control"  name="deadline" id="deadline" placeholder="포트폴리오 링크를 입력해주세요.">
-                        </div>
-                    </div>
-                    <hr>
-                </div>
-
-
-                <div class="row">
-                    <div class="mb-4">
-                        <label for="title" class="form-label">한줄 소개</label>
-                        <input type="text" class="form-control"  name="title" id="title" placeholder="자신을 어필할 수 있는 한 줄 소개를 입력해주세요.">
-                    </div>
-                    <div class="mb-4">
-                        <label for="content" class="form-label">내용</label>
-                        <textarea class="form-control"  name="content" id="content" style="height: 300px" placeholder="내용을 입력해주세요."></textarea>
-                    </div>
-                    <div class="mb-4">
-                        <label for="skills" class="form-label">보유 능력</label>
-                        <input type="text" class="form-control"  name="skills" id="skills" placeholder="띄어쓰기로 구분해서 보유한 능력을 입력해주세요.">
+                <div class="vr" style="padding: 1px"></div>
+                <div class="col-8">
+                    <div id="content">
+                        <textarea class="form-control" style="height: 450px" placeholder="자신을 어필할 수 있는 글을 작성해주세요."></textarea>
                     </div>
                 </div>
+            </div>
 
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <a href="/" class="btn btn-outline-secondary me-md-2" id="cancelBtn" type="button">취소</a>
-                    <button class="btn btn-primary" id="submitBtn" type="button">저장</button>
+            <div class="row">
+                <div class="col d-flex justify-content-end">
+                    <div class="me-2">
+                        <button class="btn btn-outline-secondary">취소</button>
+                    </div>
+
+                    <div>
+                        <button class="btn btn-outline-primary">저장</button>
+                    </div>
                 </div>
+            </div>
 
-            </form>
+
 
         </div>
     </div>
