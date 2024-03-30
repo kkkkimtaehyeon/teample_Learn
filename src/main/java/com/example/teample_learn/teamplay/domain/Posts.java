@@ -16,6 +16,7 @@ import org.hibernate.annotations.ColumnDefault;
 public class Posts extends BaseTime{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "teamplay_id")
     private Long id;
 
     @Column(nullable = true, name = "author")

@@ -6,7 +6,9 @@ import com.example.teample_learn.user.User;
 import jakarta.annotation.Nullable;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @Data
 public class CommentSaveRequestDto {
 

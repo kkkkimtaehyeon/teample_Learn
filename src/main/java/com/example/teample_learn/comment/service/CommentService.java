@@ -3,6 +3,7 @@ package com.example.teample_learn.comment.service;
 import com.example.teample_learn.comment.domain.Comment;
 import com.example.teample_learn.comment.dto.CommentResponseDto;
 import com.example.teample_learn.comment.dto.CommentSaveRequestDto;
+import com.example.teample_learn.comment.dto.CommentUpdateRequestDto;
 import com.example.teample_learn.comment.repo.CommentRepository;
 import com.example.teample_learn.teamplay.domain.Posts;
 import com.example.teample_learn.teamplay.repo.TeamplayRepository;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
@@ -23,7 +25,9 @@ public class CommentService {
         Posts posts = teamplayRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시물을 찾을 수 없습니다"));
         requestDto.setPosts(posts);
 
-        return commentRepository.save(requestDto.toEntity()).getId();
+        Comment comment = requestDto.toEntity();
+
+        return commentRepository.save(comment).getId();
     }
 
     public List<CommentResponseDto> getComments(Long id) {
@@ -44,5 +48,11 @@ public class CommentService {
         Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new IllegalArgumentException("해당 댓글을 찾을 수 없습니다"));
 
         commentRepository.delete(comment);
+    }
+
+    @Transactional
+    public void update(Long commentId, CommentUpdateRequestDto requestDto) {
+        Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new IllegalArgumentException("해당 댓글을 찾을 수 없습니다"));
+        comment.update(requestDto);
     }
 }

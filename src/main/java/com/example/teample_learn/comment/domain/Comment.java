@@ -1,8 +1,10 @@
 package com.example.teample_learn.comment.domain;
 
+import com.example.teample_learn.comment.dto.CommentUpdateRequestDto;
 import com.example.teample_learn.teamplay.domain.BaseTime;
 import com.example.teample_learn.teamplay.domain.Posts;
 import com.example.teample_learn.user.User;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
@@ -24,6 +26,7 @@ public class Comment extends BaseTime {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "comment_id")
     private Long id;
 
     @Column(name = "content", nullable = false)
@@ -33,7 +36,7 @@ public class Comment extends BaseTime {
     @JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private User user;*/
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "posts_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Posts posts;
 
@@ -42,4 +45,9 @@ public class Comment extends BaseTime {
         this.content = content;
         this.posts = posts;
     }
+
+    public void update(CommentUpdateRequestDto requestDto) {
+        this.content = requestDto.getContent();
+    }
+
 }
