@@ -39,7 +39,10 @@ public class TeamplayControllerTest {
    static String title = "제목";
    static String content = "내용";
    static String category = "개발";
-   static Boolean contact = true;
+   static Boolean meeting = true;
+   static String deadline = "23-03-27";
+   static Integer quota = 1;
+   static String duration = "1개월";
 
     @After
     public void cleanUp() {
@@ -58,12 +61,15 @@ public class TeamplayControllerTest {
                 .title(title)
                 .content(content)
                 .category(category)
-                .contact(contact)
+                .meeting(meeting)
+                .deadline(deadline)
+                .quota(quota)
+                .duration(duration)
                 .build();
 
         Long postId = teamplayRepository.save(requestDto.toEntity()).getId();
 
-        String url = "http://localhost:" + port + "/post/" + postId;
+        String url = "http://localhost:" + port + "/teamplay/" + postId;
 
         ResponseEntity<TeamplayResponseDto> responseEntity = restTemplate.getForEntity(url, TeamplayResponseDto.class);
 
@@ -87,7 +93,7 @@ public class TeamplayControllerTest {
                 .title(title)
                 .content(content)
                 .category(category)
-                .contact(contact)
+                .meeting(meeting)
                 .build();
 
         String url = "http://localhost:" + port + "/post";
@@ -114,7 +120,7 @@ public class TeamplayControllerTest {
                 .title(title)
                 .content(content)
                 .category(category)
-                .contact(contact)
+                .meeting(meeting)
                 .build();
 
         Long postId = teamplayRepository.save(savedPost).getId();
@@ -122,13 +128,13 @@ public class TeamplayControllerTest {
         String expectedTitle = "title1";
         String expectedContent = "content1";
         String expectedCategory = "category1";
-        Boolean expectedContact = false;
+        Boolean expectedMeeting = false;
 
         TeamplayUpdateRequestDto requestDto = TeamplayUpdateRequestDto.builder()
                 .title(expectedTitle)
                 .content(expectedContent)
                 .category(expectedCategory)
-                .contact(expectedContact)
+                .meeting(expectedMeeting)
                 .build();
 
 
@@ -151,7 +157,7 @@ public class TeamplayControllerTest {
         assertThat(posts.getTitle()).isEqualTo(expectedTitle);
         assertThat(posts.getContent()).isEqualTo(expectedContent);
         assertThat(posts.getCategory()).isEqualTo(expectedCategory);
-        assertThat(posts.getContact()).isEqualTo(expectedContact);
+        assertThat(posts.getMeeting()).isEqualTo(expectedMeeting);
     }
 
     @Test
@@ -161,7 +167,7 @@ public class TeamplayControllerTest {
                 .title(title)
                 .content(content)
                 .category(category)
-                .contact(contact)
+                .meeting(meeting)
                 .build();
 
         Long postId = teamplayRepository.save(savedPost).getId();
