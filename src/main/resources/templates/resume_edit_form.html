@@ -65,59 +65,79 @@
 </div>
 
 <div class="container w-70">
-    <div id="empty-resume">
-        <div><h1>이력서가 비어있습니다.</h1></div>
-        <div><a href="/user/resume/create" class="btn btn-primary">이력서 만들기</a></div>
-    </div>
-
-    <div class="card" id="resume">
+    <div class="card">
         <div class="card-body">
-            <div class="resume-title card-title mb-5">
-                <h1 id="title">한줄 소개 제목입니다.</h1>
-            </div>
 
-            <hr>
+            <form id="resume-update-form">
+                <div class="resume-title card-title mb-5">
+                    <h1><input type="text" class="form-control" id="title" name="title" placeholder="자신을 한 줄로 표현해주세요."></h1>
+                </div>
 
-            <div class="resume-info row gap-3 mt-3">
-                <div class="col">
-                    <div class="row mb-3">
-                        <label for="real-name">이름</label>
-                        <p id="real-name">김태현</p>
+                <hr>
+
+                <div class="resume-info row gap-3 mt-3">
+                    <div class="col">
+                        <div class="row mb-3">
+                            <label for="real-name">이름</label>
+                            <div>
+                                <input type="text" class="form-control" id="real-name" name="realName">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="phone">연락처</label>
+                            <div>
+                                <input type="text" class="form-control" id="phone" name="phone" placeholder="010-xxxx-xxxx">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="email">email</label>
+                            <div>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="test@naver.com">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="location">location</label>
+                            <div>
+                                <input type="text" class="form-control" id="location" name="location" placeholder="활동지역">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="work">work at</label>
+                            <div>
+                                <input type="text" class="form-control" id="work" name="work" placeholder="직장/학교">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="portfolios">portfolios</label>
+                            <div>
+                                <input type="text" class="form-control" id="portfolios" name="portfolios" placeholder="링크를 입력해주세요.">
+                            </div>
+                        </div>
                     </div>
-                    <div class="row mb-3">
-                        <label for="phone">연락처</label>
-                        <p id="phone">010-0000-0000</p>
-                    </div>
-                    <div class="row mb-3">
-                        <label for="email">email</label>
-                        <p id="email">123@naver.com</p>
-                    </div>
-                    <div class="row mb-3">
-                        <label for="location">location</label>
-                        <p id="location">gwangyang</p>
-                    </div>
-                    <div class="row mb-3">
-                        <label for="work">work at</label>
-                        <p id="work">Chosun University</p>
-                    </div>
-                    <div class="row mb-3">
-                        <label for="portfolios">portfolios</label>
-                        <p id="portfolios">portfolio links</p>
+                    <div class="vr" style="padding: 1px"></div>
+                    <div class="col-8">
+                        <div >
+                            <textarea class="form-control" id="content" style="height: 450px" name="content" placeholder="자신을 어필할 수 있는 글을 작성해주세요."></textarea>
+                        </div>
                     </div>
                 </div>
-                <div class="vr" style="padding: 1px"></div>
-                <div class="col-8">
-                    <div id="content">
-                        <p>이력에서 들어갈 내용입니다</p>
+            </form>
+
+            <div class="row">
+                <div class="col d-flex justify-content-end">
+                    <div class="me-2">
+                        <button class="btn btn-outline-secondary">취소</button>
+                    </div>
+
+                    <div>
+                        <button class="btn btn-outline-primary" id="updateBtn">수정</button>
                     </div>
                 </div>
             </div>
+
+
 
         </div>
-    </div>
-    <div class="d-flex justify-content-end">
-        <a href="/user/resume/edit" class="btn btn-primary">수정</a>
-
     </div>
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -126,6 +146,25 @@
     window.onload = () => {
         loadResume();
     }
+
+    const updateBtn = document.getElementById('updateBtn');
+    updateBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        const updateForm = new FormData(document.getElementById('resume-update-form'));
+
+        axios.put('/user/resume', updateForm)
+            .then(response => {
+                console.log('이력서 수정 성공!' + response);
+                window.location.href='/user/resume/view';
+            })
+            .catch(error => {
+                console.log('이력서 수정 실패!' +error);
+            })
+
+    })
+
+
 
     function loadResume() {
         const title = document.getElementById('title');
@@ -142,29 +181,21 @@
                 console.log('resume loading success!' + response);
                 const resume = response.data;
 
-                //null로 반환하면 "" 로 도착
-                if(response.data === '') {
-                    document.getElementById('resume').className = 'visually-hidden';
-                }
-                else {
-                    document.getElementById('empty-resume').className = 'visually-hidden';
-                    title.innerText=resume.title;
-                    realName.innerText=resume.realName;
-                    phone.innerText=resume.phone;
-                    email.innerText=resume.email;
-                    location.innerText=resume.location;
-                    work.innerText=resume.work;
-                    portfolios.innerText=resume.portfolios;
-                    content.innerText=resume.content;
-                }
-
-
+                title.value = resume.title;
+                realName.value = resume.realName;
+                phone.value = resume.phone;
+                email.value = resume.email;
+                location.value = resume.location;
+                work.value = resume.work;
+                portfolios.value = resume.portfolios;
+                content.value = resume.content;
 
             })
             .catch(error => {
                 console.log('resume loading failed!' + error);
             })
     }
+
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

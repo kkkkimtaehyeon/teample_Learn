@@ -1,12 +1,14 @@
 package com.example.teample_learn.resume.domain;
 
 import com.example.teample_learn.resume.dto.ResumeResponseDto;
+import com.example.teample_learn.resume.dto.ResumeUpdateRequestDto;
 import com.example.teample_learn.user.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Builder;
@@ -51,7 +53,11 @@ public class Resume {
     @Column(name = "content")
     private String content;
 
-    @OneToOne(mappedBy = "resume")
+    /*@OneToOne(mappedBy = "resume")
+    private User user;*/
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Builder
@@ -70,6 +76,18 @@ public class Resume {
 
     public ResumeResponseDto toDto() {
         return new ResumeResponseDto(this);
+    }
+
+    public void update(ResumeUpdateRequestDto requestDto) {
+        this.realName = requestDto.getRealName();
+        this.title = requestDto.getTitle();;
+        this.content = requestDto.getContent();
+        this.phone = requestDto.getPhone();
+        this.email = requestDto.getEmail();
+        this.location = requestDto.getLocation();
+        this.work= requestDto.getWork();
+        this.portfolios = requestDto.getPortfolios();
+        this.skills = requestDto.getSkills();
     }
 
 }
