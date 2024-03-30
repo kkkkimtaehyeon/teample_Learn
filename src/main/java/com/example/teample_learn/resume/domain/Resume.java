@@ -1,21 +1,19 @@
 package com.example.teample_learn.resume.domain;
 
+import com.example.teample_learn.resume.dto.ResumeResponseDto;
 import com.example.teample_learn.user.User;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
-import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @Getter
 @Entity
 @Table(name = "resume")
@@ -25,6 +23,9 @@ public class Resume {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "resume_id")
     private Long id;
+
+    @Column(name = "real_name")
+    private String realName;
 
     @Column(name = "phone")
     private String phone;
@@ -38,6 +39,9 @@ public class Resume {
     @Column(name = "work")
     private String work;
 
+    @Column(name = "portfolios")
+    private String portfolios;
+
     @Column(name = "skills")
     private String skills;
 
@@ -47,20 +51,25 @@ public class Resume {
     @Column(name = "content")
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    @OneToOne(mappedBy = "resume")
     private User user;
 
     @Builder
-    public Resume(User user, String title, String content, String phone, String email, String location, String work, String skills) {
+    public Resume(User user, String realName, String title, String content, String phone, String email, String location, String work, String portfolios, String skills) {
         this.user = user;
+        this.realName = realName;
         this.title = title;
         this.content = content;
         this.phone = phone;
         this.email = email;
         this.location = location;
         this.work = work;
+        this.portfolios = portfolios;
         this.skills = skills;
+    }
+
+    public ResumeResponseDto toDto() {
+        return new ResumeResponseDto(this);
     }
 
 }
