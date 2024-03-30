@@ -179,6 +179,7 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
 
                     <div class="footer row">
@@ -187,7 +188,6 @@
                     <hr>
                 </div>
             </div>
-
 
         </div>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -257,7 +257,7 @@
                                                         ...
                                                     </a>
                                                     <ul class="dropdown-menu">
-                                                        <li><button id="comment-updateBtn" class="dropdown-item">수정</button></li>
+                                                        <li><button id="comment-updateBtn" class="dropdown-item" onclick="updateComment(${comment.id})">수정</button></li>
                                                         <li><button id="comment-deleteBtn" class="dropdown-item" onclick="deleteComment(${comment.id})">삭제</button></li>
                                                     </ul>
                                                 </div>
@@ -283,7 +283,7 @@
             }
 
             function deleteComment(commentId) {
-                axios.delete(`/teamplay/${id}/comment/${commentId}`)
+                axios.delete(`/comment/${commentId}`)
                     .then(response => {
                         console.log('댓글 삭제 성공', response);
                         getComments();
