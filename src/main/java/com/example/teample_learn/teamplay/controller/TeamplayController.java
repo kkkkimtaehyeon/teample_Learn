@@ -29,21 +29,23 @@ public class TeamplayController {
     private final HttpSession httpSession;
 
     @GetMapping
-    public Page<TeamplayResponseDto> pagesAll(
-            @RequestParam(value = "category", required = false) String category,
+    public Page<TeamplayResponseDto> allPages(
+            @RequestParam(value = "keyword", required = false) String keyword,
             @PageableDefault(page = 0, size = 20, sort = "id", direction = Direction.DESC) Pageable pageable) {
 
+        if(keyword != null) {
+            return teamplayService.getSearchPages(keyword, pageable);
+        }
         return teamplayService.getPages(pageable);
     }
 
-
     @GetMapping("/public")
-    public Page<TeamplayResponseDto> pagesPublic(@PageableDefault(page = 0, size = 20, sort = "id", direction = Direction.DESC) Pageable pageable) {
+    public Page<TeamplayResponseDto> publicPages(@PageableDefault(page = 0, size = 20, sort = "id", direction = Direction.DESC) Pageable pageable) {
 
         return teamplayService.getPages("public", pageable);
     }
     @GetMapping("/private")
-    public Page<TeamplayResponseDto> pagesPrivate(@PageableDefault(page = 0, size = 20, sort = "id", direction = Direction.DESC) Pageable pageable) {
+    public Page<TeamplayResponseDto> privatePages(@PageableDefault(page = 0, size = 20, sort = "id", direction = Direction.DESC) Pageable pageable) {
 
         return teamplayService.getPages("private", pageable);
     }

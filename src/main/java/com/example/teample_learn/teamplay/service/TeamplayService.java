@@ -33,6 +33,12 @@ public class TeamplayService {
         return postsPage.map(TeamplayResponseDto::new);
     }
 
+    public Page<TeamplayResponseDto> getSearchPages(String keyword, Pageable pageable) {
+        Page<Posts> postsPage = teamplayRepository.findAllByTitleContaining(keyword, pageable);
+
+        return postsPage.map(TeamplayResponseDto::new);
+    }
+
     public TeamplayResponseDto findById(Long id) {
         Posts post = teamplayRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시물이 없습니다" + id));
 
