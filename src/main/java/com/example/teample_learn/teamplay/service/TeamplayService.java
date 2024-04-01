@@ -21,11 +21,18 @@ public class TeamplayService {
         return teamplayRepository.save(requestDto.toEntity()).getId();
     }
 
-    public Page<TeamplayResponseDto> getPage(Pageable pageable) {
+    public Page<TeamplayResponseDto> getPages(Pageable pageable) {
         Page<Posts> postsPage = teamplayRepository.findAll(pageable);
 
         return postsPage.map(TeamplayResponseDto::new);
     }
+
+    public Page<TeamplayResponseDto> getPages(String category, Pageable pageable) {
+        Page<Posts> postsPage = teamplayRepository.findAllByCategory(category, pageable);
+
+        return postsPage.map(TeamplayResponseDto::new);
+    }
+
     public TeamplayResponseDto findById(Long id) {
         Posts post = teamplayRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시물이 없습니다" + id));
 

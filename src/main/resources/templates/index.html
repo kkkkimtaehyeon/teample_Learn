@@ -131,9 +131,9 @@
     <hr class="border-2">
     <div class="mt-5">
         <div class=" post-category text-center">
-            <a href="#">전체</a>
-            <a href="#">개인</a>
-            <a href="#">학교</a>
+            <button class="btn btn-outline-primary" id="all">전체</button>
+            <button class="btn btn-outline-primary" id="privateOnly">개인</button>
+            <button class="btn btn-outline-primary" id="publicOnly">학교</button>
         </div>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <a href="/teamplay/create" class="btn btn-primary me-md-2" type="button">팀플 만들기</a>
@@ -171,23 +171,61 @@
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
+
+    const all = document.getElementById('all');
+    const publicOnly = document.getElementById('publicOnly');
+    const privateOnly = document.getElementById('privateOnly');
+
 window.onload = () => {
-    getPosts();
+    getAllPages();
 };
 
-function getPosts() {
+function getAllPages() {
     axios.get('/teamplay')
         .then(function (response) {
             console.log(response);
+            loadPages(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+}
 
-            const postContainer = document.getElementById('post-container');
-            let itemContainer = '';
+all.addEventListener('click', () => {
+    getAllPages();
+});
 
-            for (let item of response.data.content) {
-                console.log(item.author);
-                itemContainer += `
+publicOnly.addEventListener('click', () => {
+    axios.get('/teamplay/public')
+        .then(function (response) {
+            console.log('public 로드 성공!');
+            loadPages(response);
+        })
+        .catch(function (error) {
+            console.log('public 로드 실패!');
+        })
+});
+
+privateOnly.addEventListener('click', () => {
+    axios.get('/teamplay/private')
+        .then(function (response) {
+            console.log('private 로드 성공!');
+            loadPages(response);
+        })
+        .catch(function (error) {
+            console.log('private 로드 실패!');
+        })
+});
+
+function loadPages(response) {
+    const postContainer = document.getElementById('post-container');
+    let itemContainer = '';
+
+    for (let item of response.data.content) {
+        console.log(item.author);
+        itemContainer += `
                 <div class="col">
-                    <div class="card post-card border-2" onclick="location.href='/teamplay/${item.id}'">
+                    <div class="card post-card border-2" onclick="location.href='/teamplay/${item.category}/${item.id}'">
                         <div class="card-body">
                             <h5 class="card-title" style="height: 8rem">${item.title}</h5>
                             <hr class="border-2">
@@ -196,12 +234,8 @@ function getPosts() {
                     </div>
                 </div>
                 `;
-            }
-            postContainer.innerHTML = itemContainer;
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
+    }
+    postContainer.innerHTML = itemContainer;
 }
 
 </script>

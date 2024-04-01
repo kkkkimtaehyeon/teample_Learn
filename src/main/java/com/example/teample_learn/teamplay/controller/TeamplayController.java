@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,12 +29,23 @@ public class TeamplayController {
     private final HttpSession httpSession;
 
     @GetMapping
-    public Page<TeamplayResponseDto> page(@PageableDefault(page = 0, size = 20, sort = "id", direction = Direction.DESC)
-                                      Pageable pageable) {
-        return teamplayService.getPage(pageable);
+    public Page<TeamplayResponseDto> pagesAll(
+            @RequestParam(value = "category", required = false) String category,
+            @PageableDefault(page = 0, size = 20, sort = "id", direction = Direction.DESC) Pageable pageable) {
+
+        return teamplayService.getPages(pageable);
     }
-    @GetMapping("/{id}")
-    public ModelAndView view(@PathVariable("id") Long id) {
+
+
+    @GetMapping("/{category}")
+    public Page<TeamplayResponseDto> pagesPublic(@PathVariable("category") String category,
+                                                 @PageableDefault(page = 0, size = 20, sort = "id", direction = Direction.DESC) Pageable pageable) {
+
+        return teamplayService.getPages(category, pageable);
+    }
+
+    @GetMapping("/{category}/{id}")
+    public ModelAndView view(@PathVariable("id") Long id, @PathVariable("category") String category) {
 
         ModelAndView mav = new ModelAndView();
         mav.setViewName("teamplay_view_form");
