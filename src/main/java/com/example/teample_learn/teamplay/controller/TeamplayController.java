@@ -37,15 +37,19 @@ public class TeamplayController {
     }
 
 
-    @GetMapping("/{category}")
-    public Page<TeamplayResponseDto> pagesPublic(@PathVariable("category") String category,
-                                                 @PageableDefault(page = 0, size = 20, sort = "id", direction = Direction.DESC) Pageable pageable) {
+    @GetMapping("/public")
+    public Page<TeamplayResponseDto> pagesPublic(@PageableDefault(page = 0, size = 20, sort = "id", direction = Direction.DESC) Pageable pageable) {
 
-        return teamplayService.getPages(category, pageable);
+        return teamplayService.getPages("public", pageable);
+    }
+    @GetMapping("/private")
+    public Page<TeamplayResponseDto> pagesPrivate(@PageableDefault(page = 0, size = 20, sort = "id", direction = Direction.DESC) Pageable pageable) {
+
+        return teamplayService.getPages("private", pageable);
     }
 
-    @GetMapping("/{category}/{id}")
-    public ModelAndView view(@PathVariable("id") Long id, @PathVariable("category") String category) {
+    @GetMapping("/{id}")
+    public ModelAndView view(@PathVariable("id") Long id) {
 
         ModelAndView mav = new ModelAndView();
         mav.setViewName("teamplay_view_form");
