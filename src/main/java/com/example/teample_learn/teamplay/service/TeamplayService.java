@@ -58,16 +58,16 @@ public class TeamplayService {
         teamplayRepository.delete(post);
     }
 
-    public Long addScrap(Long id) {
+    public Long addLike(Long id) {
         Posts post = teamplayRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시물이 없습니다" + id));
-        post.addScrapCount();
+        post.addLikeCount();
 
         return id;
     }
 
-    public Long subScrap(Long id) {
+    public Long subLike(Long id) {
         Posts post = teamplayRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시물이 없습니다" + id));
-        post.subScrapCount();
+        post.subLikeCount();
         return id;
     }
 

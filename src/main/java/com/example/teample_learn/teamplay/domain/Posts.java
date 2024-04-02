@@ -28,13 +28,11 @@ public class Posts extends BaseTime{
     @Column(nullable = false, name = "content")
     private String content;
 
-    @Column(nullable = true, name = "view_count")
-    @ColumnDefault("0")
-    private int viewCount;
+    @Column(nullable = false, name = "view_count")
+    private int viewCount = 0;
 
-    @Column(nullable = true, name = "scrap_count")
-    @ColumnDefault("0")
-    private int scrapCount;
+    @Column(nullable = false, name = "like_count")
+    private int likeCount = 0;
 
     @Column(nullable = true, name = "tags")
     private String tags;
@@ -106,10 +104,10 @@ public class Posts extends BaseTime{
     public void addViewCount() {
         viewCount++;
     }
-    public void addScrapCount() {
-        scrapCount++;
+    public void addLikeCount() {
+        likeCount++;
     }
-    public void subScrapCount() {
-        scrapCount--;
+    public void subLikeCount() {
+        likeCount--;
     }
 }

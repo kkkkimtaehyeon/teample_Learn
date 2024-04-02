@@ -95,13 +95,5 @@ public class TeamplayController {
         teamplayService.delete(id);
     }
 
-    @PostMapping("{id}/scrap")
-    public Long addScrap(@PathVariable("id") Long id) {
-        return teamplayService.addScrap(id);
-    }
 
-    @DeleteMapping("/{id}/scrap")
-    public Long subScrap(@PathVariable("id") Long id) {
-        return teamplayService.subScrap(id);
-    }
 }

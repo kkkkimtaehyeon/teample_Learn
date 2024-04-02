@@ -12,6 +12,8 @@ public class TeamplayResponseDto {
     String author;
     String title;
     String content;
+    int viewCount;
+    int likeCount;
     String tags;
     Boolean meeting;
     String category;
@@ -28,6 +30,8 @@ public class TeamplayResponseDto {
         this.author = post.getAuthor();
         this.title = post.getTitle();
         this.content = post.getContent();
+        this.viewCount = post.getViewCount();
+        this.likeCount = post.getLikeCount();
         this.tags = post.getTags();
         this.meeting = post.getMeeting();
         this.category = post.getCategory();
