@@ -65,8 +65,8 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="/oauth2/authorization/google" class="nav-link">구글 로그인</a>
 
+                        <a href="/oauth2/authorization/google" id="google-login" class="nav-link"><i class="fa-brands fa-google"></i>구글 로그인</a>
                     </li>
 
                     <li class="nav-item">
@@ -84,23 +84,21 @@
                             <li><button class="dropdown-item" type="button">Something else here</button></li>
                         </ul>
                     </div>
-                    <div class="btn-group">
-                        <button type="button" id="notice" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-                            알림
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-lg-end">
-                            <li><button class="dropdown-item" type="button">Action</button></li>
-                            <li><button class="dropdown-item" type="button">Another action</button></li>
-                            <li><button class="dropdown-item" type="button">Something else here</button></li>
-                        </ul>
-                    </div>
+                    <button type="button" class="btn btn-primary position-relative">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                            <span class="visually-hidden">New alerts</span>
+                        </span>
+                    </button>
+
                     <div class="btn-group">
                         <button type="button" id="profile" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-                            프로필
+                            <i class="fa-regular fa-user"></i>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
                             <li><button class="dropdown-item" type="button">내정보</button></li>
                             <li><button class="dropdown-item" type="button">글관리</button></li>
+                            <li><button class="dropdown-item" type="button">활동내역</button></li>
                             <li><a href="/user/resume/view" class="dropdown-item" >이력서 관리</a></li>
                         </ul>
                     </div>
