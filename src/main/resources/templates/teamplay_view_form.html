@@ -97,12 +97,12 @@
                 <div class="row" id="post-info">
                     <div class="row mb-3">
                         <div class="col">
-                            <label>팀플 분류</label>
-                            <span id="category" th:text="${post.category}"></span>
+                            <label>학과</label>
+                            <span id="major" th:text="${post.major}"></span>
                         </div>
                         <div class="col">
-                            <label >모집인원</label>
-                            <span id="quota" th:text="${post.quota}"></span>
+                            <label >강의/분반</label>
+                            <span class="border border-0 rounded-3 bg-primary-subtle p-1" id="quota" th:text="${post.quota}">컴퓨터비전/01</span>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -117,12 +117,12 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col">
-                            <label>시작 예정</label>
-                            <span id="deadline" th:text="${post.deadline}"></span>
+                            <label>모집인원</label>
+                            <span th:text="${post.quota}"></span>
                         </div>
                         <div class="col">
                             <label>예상 기간</label>
-                            <span id="duration" th:text="${post.duration}"></span>
+                            <span class="border border-0 rounded-3 bg-primary-subtle p-1" id="duration" th:text="${post.duration} ">24-04-05 ~ 24-04-06</span>
                         </div>
                     </div>
 
