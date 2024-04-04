@@ -16,7 +16,7 @@ public class TeamplayResponseDto {
     int likeCount;
     String tags;
     Boolean meeting;
-    String category;
+    String major;
     String className;
     Integer classDivision;
     String deadline;
@@ -34,7 +34,7 @@ public class TeamplayResponseDto {
         this.likeCount = post.getLikeCount();
         this.tags = post.getTags();
         this.meeting = post.getMeeting();
-        this.category = post.getCategory();
+        this.major = post.getMajor();
         this.className = post.getClassName();
         this.classDivision = post.getClassDivision();
         this.deadline = post.getDeadline();

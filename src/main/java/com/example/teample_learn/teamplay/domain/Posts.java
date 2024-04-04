@@ -41,8 +41,8 @@ public class Posts extends BaseTime{
     @ColumnDefault("false")
     private Boolean meeting;
 
-    @Column(nullable = false, name = "category")
-    private String category;
+    @Column(nullable = false, name = "major")
+    private String major;
 
     @Column(nullable = true, name = "class_name")
     private String className;
@@ -69,14 +69,14 @@ public class Posts extends BaseTime{
 
 
     @Builder
-    public Posts(String author, String title, String content, String tags, Boolean meeting, String category, String className,
+    public Posts(String author, String title, String content, String tags, Boolean meeting, String major, String className,
                  Integer classDivision, String deadline, String duration, Integer quota, String skills, String contact) {
         this.author = author;
         this.title = title;
         this.content = content;
         this.tags = tags;
         this.meeting = meeting;
-        this.category = category;
+        this.major = major;
         this.className = className;
         this.classDivision = classDivision;
         this.deadline = deadline;
@@ -91,7 +91,7 @@ public class Posts extends BaseTime{
         this.content = requestDto.getContent();
         this.tags = requestDto.getTags();
         this.meeting = requestDto.getMeeting();
-        this.category = requestDto.getCategory();
+        this.major = requestDto.getMajor();
         this.className = requestDto.getClassName();;
         this.classDivision = requestDto.getClassDivision();
         this.deadline = requestDto.getDeadline();

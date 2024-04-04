@@ -39,7 +39,7 @@ public class TeamplayController {
         return teamplayService.getPages(pageable);
     }
 
-    @GetMapping("/public")
+    /*@GetMapping("/public")
     public Page<TeamplayResponseDto> publicPages(@PageableDefault(page = 0, size = 20, sort = "id", direction = Direction.DESC) Pageable pageable) {
 
         return teamplayService.getPages("public", pageable);
@@ -48,7 +48,7 @@ public class TeamplayController {
     public Page<TeamplayResponseDto> privatePages(@PageableDefault(page = 0, size = 20, sort = "id", direction = Direction.DESC) Pageable pageable) {
 
         return teamplayService.getPages("private", pageable);
-    }
+    }*/
 
     @GetMapping("/{id}")
     public ModelAndView view(@PathVariable("id") Long id) {

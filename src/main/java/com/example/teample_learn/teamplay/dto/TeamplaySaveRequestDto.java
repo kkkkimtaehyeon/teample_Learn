@@ -14,7 +14,7 @@ public class TeamplaySaveRequestDto {
     String content;
     String tags;
     Boolean meeting;
-    String category;
+    String major;
     String className;
     Integer classDivision;
     String deadline;
@@ -24,14 +24,14 @@ public class TeamplaySaveRequestDto {
     String contact;
 
     @Builder
-    public TeamplaySaveRequestDto(String author, String title, String content, String tags, Boolean meeting, String category, String className,
+    public TeamplaySaveRequestDto(String author, String title, String content, String tags, Boolean meeting, String major, String className,
                                   Integer classDivision, String deadline, String duration, Integer quota, String skills, String contact) {
         this.author = author;
         this.title = title;
         this.content = content;
         this.tags = tags;
         this.meeting = meeting;
-        this.category = category;
+        this.major = major;
         this.className = className;
         this.classDivision = classDivision;
         this.deadline = deadline;
@@ -48,7 +48,7 @@ public class TeamplaySaveRequestDto {
                 .content(content)
                 .tags(tags)
                 .meeting(meeting)
-                .category(category)
+                .major(major)
                 .className(className)
                 .classDivision(classDivision)
                 .deadline(deadline)

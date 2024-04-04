@@ -10,7 +10,7 @@ public class TeamplayUpdateRequestDto {
     String content;
     String tags;
     Boolean meeting;
-    String category;
+    String major;
     String className;
     Integer classDivision;
     String deadline;
@@ -20,13 +20,13 @@ public class TeamplayUpdateRequestDto {
     String contact;
 
     @Builder
-    public TeamplayUpdateRequestDto(String title, String content, String tags, Boolean meeting, String category, String className,
+    public TeamplayUpdateRequestDto(String title, String content, String tags, Boolean meeting, String major, String className,
                                     Integer classDivision, String deadline, String duration, Integer quota, String skills, String contact) {
         this.title = title;
         this.content = content;
         this.tags = tags;
         this.meeting = meeting;
-        this.category = category;
+        this.major = major;
         this.className = className;
         this.classDivision = classDivision;
         this.deadline = deadline;

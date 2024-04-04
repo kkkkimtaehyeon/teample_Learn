@@ -27,8 +27,8 @@ public class TeamplayService {
         return postsPage.map(TeamplayResponseDto::new);
     }
 
-    public Page<TeamplayResponseDto> getPages(String category, Pageable pageable) {
-        Page<Posts> postsPage = teamplayRepository.findAllByCategory(category, pageable);
+    public Page<TeamplayResponseDto> getPages(String major, Pageable pageable) {
+        Page<Posts> postsPage = teamplayRepository.findAllByMajor(major, pageable);
 
         return postsPage.map(TeamplayResponseDto::new);
     }
