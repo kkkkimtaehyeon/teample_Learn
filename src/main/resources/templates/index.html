@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -64,14 +64,7 @@
                             <li><a class="dropdown-item" href="#">Something else here</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">
 
-                        <a href="/oauth2/authorization/google" id="google-login" class="nav-link"><i class="fa-brands fa-google"></i>구글 로그인</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="/logout" class="nav-link">로그아웃</a>
-                    </li>
                 </ul>
                 <div class="toggles">
                     <div class="btn-group">
@@ -96,12 +89,27 @@
                             <i class="fa-regular fa-user"></i>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
-                            <li><button class="dropdown-item" type="button">내정보</button></li>
-                            <li><button class="dropdown-item" type="button">글관리</button></li>
-                            <li><button class="dropdown-item" type="button">활동내역</button></li>
-                            <li><a href="/user/resume/view" class="dropdown-item" >이력서 관리</a></li>
+                            <li th:unless="${session.user}">
+                                <a href="/oauth2/authorization/google" class="dropdown-item" th:id="loginBtn" type="button">로그인</a>
+                            </li>
+                            <li th:if="${session.user}">
+                                <button class="dropdown-item" type="button">내정보</button>
+                            </li>
+                            <li th:if="${session.user}">
+                                <button class="dropdown-item" type="button">글관리</button>
+                            </li>
+                            <li th:if="${session.user}">
+                                <button class="dropdown-item" type="button">활동내역</button>
+                            </li>
+                            <li th:if="${session.user}">
+                                <a href="/user/resume/view" class="dropdown-item">이력서 관리</a>
+                            </li>
+                            <li th:if="${session.user}">
+                                <a href="/logout" class="dropdown-item text-danger" type="button">로그아웃</a>
+                            </li>
                         </ul>
                     </div>
+
                 </div>
 
             </div>

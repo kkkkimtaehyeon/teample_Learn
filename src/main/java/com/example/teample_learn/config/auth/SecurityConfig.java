@@ -26,7 +26,9 @@ public class SecurityConfig {
                 .anyRequest().authenticated()
         );
 
-        http.logout(logout -> logout.logoutSuccessUrl("/"));
+        http.logout(logout -> logout
+                .logoutSuccessUrl("/")
+                .deleteCookies("JSESSIONID", "remember-me"));
 
         http.oauth2Login(oauth ->
                 oauth.userInfoEndpoint(endPoint ->
