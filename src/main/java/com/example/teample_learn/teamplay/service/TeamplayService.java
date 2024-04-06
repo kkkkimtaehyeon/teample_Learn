@@ -45,6 +45,11 @@ public class TeamplayService {
         return new TeamplayResponseDto(post);
     }
 
+    public Page<TeamplayResponseDto> findAllById(Long id, Pageable pageable) {
+        Page<Posts> post = teamplayRepository.findAllById(id, pageable);
+        return post.map(TeamplayResponseDto::new);
+    }
+
     @Transactional
     public Long update(Long id, TeamplayUpdateRequestDto requestDto) {
         Posts post = teamplayRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시물이 없습니다" + id));

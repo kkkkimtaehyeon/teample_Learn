@@ -90,7 +90,7 @@
                 <div class="row"></div>
                 <div class="row mb-1">
                     <div>
-                        <h2 class="fw-bold d-inline" th:text="${user.name}">유저</h2>
+                        <h2 class="fw-bold d-inline" id="userName" th:text="${user.getName()}">유저</h2>
                         <h2 class="d-inline text-primary"><i class="fa-solid fa-circle-check"></i></h2>
                     </div>
                 </div>
@@ -104,11 +104,7 @@
     <footer>
         <div class="p-3">
             <div class="row row-cols-1 row-cols-md-1" id="post-container">
-                <div class="card border-2 mb-3">
-                    <div class="card-body fw-bold">
-                        <h4 class="card-title fw-bold" style="height: 3rem;"><a href="/teamplay/${item.id}">제목</a></h4>
-                    </div>
-                </div>
+
             </div>
         </div>
     </footer>
@@ -118,6 +114,30 @@
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
+    window.onload = () => {
+        init();
+    }
+
+    function init() {
+        axios.get('/api/user/1/activity')
+            .then(response => {
+                const postContainer = document.getElementById('post-container');
+                let tempContainer = '';
+                for (let item of response.data.content) {
+                    tempContainer += `
+                <div class="card border-2 mb-3">
+                    <div class="card-body fw-bold">
+                        <h4 class="card-title fw-bold" style="height: 3rem;"><a href="/teamplay/${item.id}">${item.title}</a></h4>
+                    </div>
+                </div>
+                `
+                }
+                postContainer.innerHTML = tempContainer;
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
 </script>
 <script src="https://kit.fontawesome.com/0df3aecce4.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

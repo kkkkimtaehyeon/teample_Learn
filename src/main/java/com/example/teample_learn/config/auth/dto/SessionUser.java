@@ -1,6 +1,7 @@
 package com.example.teample_learn.config.auth.dto;
 
 import com.example.teample_learn.user.User;
+import lombok.Builder;
 import lombok.Getter;
 
 @Getter
@@ -11,6 +12,7 @@ public class SessionUser {
     private String email;
     private String picture;
 
+    @Builder
     public SessionUser(User user) {
         this.id = user.getId();
         this.name = user.getName();

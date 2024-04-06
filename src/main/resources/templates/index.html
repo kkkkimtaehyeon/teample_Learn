@@ -81,7 +81,7 @@
                                 <button class="dropdown-item" type="button">글관리</button>
                             </li>
                             <li th:if="${session.user}">
-                                <button class="dropdown-item" type="button">활동내역</button>
+                                <a th:href="@{/user/${user.getId()}/activity}" class="dropdown-item" type="button">활동내역</a>
                             </li>
                             <li th:if="${session.user}">
                                 <a href="/user/resume/view" class="dropdown-item">이력서 관리</a>

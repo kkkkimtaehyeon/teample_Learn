@@ -38,7 +38,7 @@ public class TeamplayControllerTest {
    static String author = "작성자";
    static String title = "제목";
    static String content = "내용";
-   static String category = "개발";
+   static String major = "컴공";
    static Boolean meeting = true;
    static String deadline = "23-03-27";
    static Integer quota = 1;
@@ -50,17 +50,13 @@ public class TeamplayControllerTest {
     }
 
     @Test
-    public void posts_페이지() {
-
-    }
-    @Test
     public void Posts_조회한다() {
 
         TeamplaySaveRequestDto requestDto = TeamplaySaveRequestDto.builder()
                 .author(author)
                 .title(title)
                 .content(content)
-                .category(category)
+                .major(major)
                 .meeting(meeting)
                 .deadline(deadline)
                 .quota(quota)
@@ -80,7 +76,7 @@ public class TeamplayControllerTest {
         assertThat(posts.getAuthor()).isEqualTo(author);
         assertThat(posts.getTitle()).isEqualTo(title);
         assertThat(posts.getContent()).isEqualTo(content);
-        assertThat(posts.getCategory()).isEqualTo(category);
+        assertThat(posts.getMajor()).isEqualTo(major);
 
 
     }
@@ -92,7 +88,7 @@ public class TeamplayControllerTest {
                 .author(author)
                 .title(title)
                 .content(content)
-                .category(category)
+                .major(major)
                 .meeting(meeting)
                 .build();
 
@@ -109,7 +105,7 @@ public class TeamplayControllerTest {
         assertThat(posts.getAuthor()).isEqualTo(author);
         assertThat(posts.getTitle()).isEqualTo(title);
         assertThat(posts.getContent()).isEqualTo(content);
-        assertThat(posts.getCategory()).isEqualTo(category);
+        assertThat(posts.getMajor()).isEqualTo(major);
 
     }
 
@@ -119,7 +115,7 @@ public class TeamplayControllerTest {
                 .author(author)
                 .title(title)
                 .content(content)
-                .category(category)
+                .major(major)
                 .meeting(meeting)
                 .build();
 
@@ -127,13 +123,13 @@ public class TeamplayControllerTest {
 
         String expectedTitle = "title1";
         String expectedContent = "content1";
-        String expectedCategory = "category1";
+        String expectedMajor = "major1";
         Boolean expectedMeeting = false;
 
         TeamplayUpdateRequestDto requestDto = TeamplayUpdateRequestDto.builder()
                 .title(expectedTitle)
                 .content(expectedContent)
-                .category(expectedCategory)
+                .major(expectedMajor)
                 .meeting(expectedMeeting)
                 .build();
 
@@ -156,7 +152,7 @@ public class TeamplayControllerTest {
         assertThat(posts.getAuthor()).isEqualTo("작성자");
         assertThat(posts.getTitle()).isEqualTo(expectedTitle);
         assertThat(posts.getContent()).isEqualTo(expectedContent);
-        assertThat(posts.getCategory()).isEqualTo(expectedCategory);
+        assertThat(posts.getMajor()).isEqualTo(expectedMajor);
         assertThat(posts.getMeeting()).isEqualTo(expectedMeeting);
     }
 
@@ -166,7 +162,7 @@ public class TeamplayControllerTest {
                 .author(author)
                 .title(title)
                 .content(content)
-                .category(category)
+                .major(major)
                 .meeting(meeting)
                 .build();
 

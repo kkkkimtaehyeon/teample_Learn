@@ -29,14 +29,14 @@ public class TeamplayRepositoryTest {
         String author = "작성자";
         String title = "제목";
         String content = "내용";
-        String category = "개발";
+        String major = "컴퓨터";
 
         teamplayRepository.save(
                 Posts.builder()
                         .author(author)
                         .content(content)
                         .title(title)
-                        .category(category)
+                        .major(major)
                 .build()
         );
 
@@ -46,7 +46,7 @@ public class TeamplayRepositoryTest {
         assertThat(posts.getAuthor()).isEqualTo(author);
         assertThat(posts.getTitle()).isEqualTo(title);
         assertThat(posts.getContent()).isEqualTo(content);
-        assertThat(posts.getCategory()).isEqualTo(category);
+        assertThat(posts.getMajor()).isEqualTo(major);
 
     }
 
