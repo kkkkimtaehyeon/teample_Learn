@@ -9,6 +9,7 @@ import com.example.teample_learn.certification.provider.EmailProvider2;
 import com.example.teample_learn.common.CertificationNumber;
 import com.example.teample_learn.common.ResponseDto;
 import com.example.teample_learn.user.UserRepository;
+import com.example.teample_learn.user.UserService;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
     private final EmailProvider2 emailProvider2;
     private final CertificationRepository certificationRepository;
+    private final UserService userService;
     @Override
     public ResponseEntity<? super EmailCertificationResponseDto> emailCertification(EmailCertificationRequestDto dto) {
         try {
@@ -49,14 +51,16 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public ResponseEntity<? super EmailCertificationResponseDto> validCertificationNumber(EmailCertificationCheckRequestDto requestDto) {
+        String userId = requestDto.getUserId();
         Optional<CertificationEntity> certification = certificationRepository.findByCertificationNumberAndUserId(
-                requestDto.getCertificationNumber(), requestDto.getUserId());
+                requestDto.getCertificationNumber(), userId);
 
         if(certification.isEmpty()) {
             return EmailCertificationResponseDto.mailCheckFail();
         }
 
         certificationRepository.delete(certification.get());
+        userService.updateRoleCertificated(Long.valueOf(userId));
 
         return EmailCertificationResponseDto.success();
     }

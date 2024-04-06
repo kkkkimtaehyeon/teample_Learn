@@ -59,6 +59,9 @@ public class User extends BaseTime {
         this.picture = picture;
         return this;
     }
+    public void updateRoleCertificated() {
+        this.role = Role.CERTIFICATED;
+    }
 
     public void updateResume(Resume resume) {
         this.resume = resume;
