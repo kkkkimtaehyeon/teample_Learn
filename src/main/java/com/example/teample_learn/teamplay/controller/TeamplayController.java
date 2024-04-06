@@ -1,5 +1,6 @@
 package com.example.teample_learn.teamplay.controller;
 
+import com.example.teample_learn.config.auth.dto.SessionUser;
 import com.example.teample_learn.teamplay.dto.TeamplayResponseDto;
 import com.example.teample_learn.teamplay.dto.TeamplaySaveRequestDto;
 import com.example.teample_learn.teamplay.dto.TeamplayUpdateRequestDto;
@@ -51,12 +52,17 @@ public class TeamplayController {
     }*/
 
     @GetMapping("/{id}")
-    public ModelAndView view(@PathVariable("id") Long id) {
+    public ModelAndView view(@PathVariable("id") Long id, HttpSession session) {
 
+        SessionUser user = (SessionUser) session.getAttribute("user");
         ModelAndView mav = new ModelAndView();
         mav.setViewName("teamplay_view_form");
         mav.addObject("id", id);
         mav.addObject("post", teamplayService.findById(id));
+        if(user != null) {
+            mav.addObject("user", user.getName());
+        }
+
         return mav;
     }
 

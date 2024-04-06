@@ -30,8 +30,8 @@
         #post-container a:hover {
             color: cornflowerblue;
         }
-        .card:hover {
-            cursor: pointer;
+        a {
+            text-decoration: none;
         }
 
     </style>
@@ -93,7 +93,7 @@
                                 <a href="/oauth2/authorization/google" class="dropdown-item" th:id="loginBtn" type="button">로그인</a>
                             </li>
                             <li th:if="${session.user}">
-                                <button class="dropdown-item" type="button">내정보</button>
+                                <a href="/profile" class="dropdown-item" type="button">내정보</a>
                             </li>
                             <li th:if="${session.user}">
                                 <button class="dropdown-item" type="button">글관리</button>
@@ -257,9 +257,9 @@ function loadPages(response) {
     for (let item of response.data.content) {
         console.log(item.author);
         itemContainer += `
-                <div class="card border-2 mb-3" onclick="location.href='/teamplay/${item.id}'">
+                <div class="card border-2 mb-3">
                 <div class="card-body fw-bold">
-                    <h4 class="card-title fw-bold" style="height: 3rem;">${item.title}</h4>
+                    <h4 class="card-title fw-bold" style="height: 3rem;"><a href="/teamplay/${item.id}">${item.title}</a></h4>
                     <div class="d-flex justify-content-between">
                         <div class="info text-secondary">
                             <span class="border border-0 rounded-3 bg-primary-subtle p-1">${item.major}</span>

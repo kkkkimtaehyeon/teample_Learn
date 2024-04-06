@@ -26,6 +26,9 @@
                 color: grey;
                 margin-right: 3px;
             }
+            a {
+                text-decoration: none;
+            }
 
         </style>
     </head>
@@ -98,27 +101,31 @@
                     <div class="row mb-3">
                         <div class="col">
                             <label>학과</label>
-                            <span id="major" th:text="${post.major}"></span>
+                            <span id="major" class="border border-0 rounded-3 bg-primary-subtle p-1" th:text="${post.major}"></span>
                         </div>
                         <div class="col">
                             <label >강의/분반</label>
-                            <span class="border border-0 rounded-3 bg-primary-subtle p-1" id="quota" th:text="${post.quota}">컴퓨터비전/01</span>
+                            <span class="border border-0 rounded-3 bg-primary-subtle p-1">
+                                <span th:text="${post.className}"></span>
+                                <span>/</span>
+                                <span th:text="${post.classDivision}"></span>
+                            </span>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col">
                             <label>연락 방법</label>
-                            <span th:text="${post.contact}"></span>
+                            <span th:text="${post.contact}" class="border border-0 rounded-3 bg-primary-subtle p-1"></span>
                         </div>
                         <div class="col" id="contact">
                             <label>대면 여부</label>
-                            <span id="meeting" th:text="${post.meeting}"></span>
+                            <span id="meeting" th:text="${post.meeting}" class="border border-0 rounded-3 bg-primary-subtle p-1"></span>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col">
                             <label>모집인원</label>
-                            <span th:text="${post.quota}"></span>
+                            <span th:text="${post.quota}" class="border border-0 rounded-3 bg-primary-subtle p-1"></span>
                         </div>
                         <div class="col">
                             <label>예상 기간</label>
@@ -129,7 +136,7 @@
                     <div class="row mb-3">
                         <div class="col">
                             <label>요구 능력</label>
-                            <span id="skills" th:text="${post.skills}"></span>
+                            <span id="skills" th:text="${post.skills}" class="border border-0 rounded-3 bg-primary-subtle p-1"></span>
                         </div>
                     </div>
 
@@ -151,12 +158,19 @@
 
             <form id="comment-create-form">
                 <div class="card mb-5">
-                    <div class="card-header d-flex justify-content-end">
-                        <button id="comment-sumbitBtn" class="btn btn-primary">댓글 작성</button>
+                    <div class="card-body" th:unless="${user}">
+                        <span>댓글을 작성하려면 <a href="/oauth2/authorization/google">로그인</a>해주세요.</span>
                     </div>
-                    <div class="card-body" style="padding-left: 50px; padding-right: 50px">
-                        <input type="text" class="form-control" id="comment-content" name="content" style="height: 80px" placeholder="궁금한 점을 댓글로 이야기해보세요.">
+                    <div th:if="${user}">
+                        <div class="card-header d-flex justify-content-between">
+                            <div><strong th:text="${user}">유저 이름</strong></div>
+                            <button id="comment-sumbitBtn" class="btn btn-primary">댓글 작성</button>
+                        </div>
+                        <div class="card-body" style="padding-left: 50px; padding-right: 50px">
+                            <input type="text" class="form-control" id="comment-content" name="content" style="height: 80px" placeholder="궁금한 점을 댓글로 이야기해보세요.">
+                        </div>
                     </div>
+
                 </div>
             </form>
 

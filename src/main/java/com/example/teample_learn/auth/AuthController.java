@@ -2,6 +2,8 @@ package com.example.teample_learn.auth;
 
 import com.example.teample_learn.certification.dto.EmailCertificationRequestDto;
 import com.example.teample_learn.certification.dto.EmailCertificationResponseDto;
+import com.example.teample_learn.config.auth.dto.SessionUser;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +19,10 @@ public class AuthController {
     private final AuthService authService;
     @PostMapping("/email-certification")
     public ResponseEntity<? super EmailCertificationResponseDto> emailCertification(
-            @RequestBody @Valid EmailCertificationRequestDto requestBody) {
+            EmailCertificationRequestDto requestBody, HttpSession session) {
 
+        SessionUser user = (SessionUser) session.getAttribute("user");
+        requestBody.setId(String.valueOf(user.getId()));
         return authService.emailCertification(requestBody);
     }
 }
