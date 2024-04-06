@@ -8,7 +8,6 @@ import com.example.teample_learn.teamplay.dto.TeamplayUpdateRequestDto;
 import com.example.teample_learn.teamplay.repo.TeamplayRepository;
 import com.example.teample_learn.teamplay.service.TeamplayService;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +37,7 @@ public class TeamplayServiceTest {
         teamplayRepository.deleteAll();
     }
 
-    @DisplayName("팀플레이 생성 테스트")
+    @DisplayName("팀플레이 생성")
     @Test
     public void 팀플레이_생성() {
         //given
@@ -82,8 +81,7 @@ public class TeamplayServiceTest {
         Long savedId = teamplayService.save(requestDto);
 
         //when
-        Posts savedPost = teamplayRepository.findById(savedId).get();
-        teamplayRepository.delete(savedPost);
+        teamplayService.delete(savedId);
 
         //then
         assertThat(teamplayRepository.count()).isEqualTo(0);
@@ -110,14 +108,26 @@ public class TeamplayServiceTest {
 
         //when
         String UPDATE_WORD = "updated";
-        TeamplayUpdateRequestDto updateRequestDto = TeamplayUpdateRequestDto
-                .builder()
-                .content(UPDATE_WORD)
+        TeamplayUpdateRequestDto updateRequestDto = TeamplayUpdateRequestDto.builder()
+                .content(savedPost.getContent())
+                .title(savedPost.getTitle())
+                .major(savedPost.getMajor())
+                .meeting(savedPost.getMeeting())
+                .deadline(savedPost.getDeadline())
+                .duration(savedPost.getDuration())
+                .quota(savedPost.getQuota())
+                .className(savedPost.getClassName())
+                .classDivision(savedPost.getClassDivision())
                 .build();
-        savedPost.update(updateRequestDto);
+        updateRequestDto.setContent(UPDATE_WORD);
+
+        teamplayService.update(savedId, updateRequestDto);
+        Posts updatedPost = teamplayRepository.findById(savedId).get();
 
         //then
-        assertThat(savedPost.getContent()).isEqualTo(UPDATE_WORD);
+        assertThat(updatedPost.getContent()).isEqualTo(UPDATE_WORD);
+        assertThat(updatedPost.getTitle()).isEqualTo(savedPost.getTitle());
+
 
     }
 }

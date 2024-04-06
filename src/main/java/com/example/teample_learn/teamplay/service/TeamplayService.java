@@ -53,6 +53,7 @@ public class TeamplayService {
     @Transactional
     public Long update(Long id, TeamplayUpdateRequestDto requestDto) {
         Posts post = teamplayRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시물이 없습니다" + id));
+
         post.update(requestDto);
 
         return id;
