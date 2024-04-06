@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.example.teample_learn.teamplay.domain.Posts;
 import com.example.teample_learn.teamplay.dto.TeamplaySaveRequestDto;
+import com.example.teample_learn.teamplay.dto.TeamplayUpdateRequestDto;
 import com.example.teample_learn.teamplay.repo.TeamplayRepository;
 import com.example.teample_learn.teamplay.service.TeamplayService;
 import org.junit.jupiter.api.AfterEach;
@@ -86,6 +87,37 @@ public class TeamplayServiceTest {
 
         //then
         assertThat(teamplayRepository.count()).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("팀플레이 수정")
+    public void update() {
+        //given
+        TeamplaySaveRequestDto requestDto = TeamplaySaveRequestDto.builder()
+                .author(AUTHOR)
+                .content(CONTENT)
+                .title(TITLE)
+                .major(MAJOR)
+                .meeting(MEETING)
+                .deadline(DEADLINE)
+                .duration(DURATION)
+                .quota(QUOTA)
+                .className(CLASS_NAME)
+                .classDivision(CLASS_DIVISION)
+                .build();
+        Long savedId = teamplayService.save(requestDto);
+        Posts savedPost = teamplayRepository.findById(savedId).get();
+
+        //when
+        String UPDATE_WORD = "updated";
+        TeamplayUpdateRequestDto updateRequestDto = TeamplayUpdateRequestDto
+                .builder()
+                .content(UPDATE_WORD)
+                .build();
+        savedPost.update(updateRequestDto);
+
+        //then
+        assertThat(savedPost.getContent()).isEqualTo(UPDATE_WORD);
 
     }
 }
