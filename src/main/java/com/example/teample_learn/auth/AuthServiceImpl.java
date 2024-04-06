@@ -2,12 +2,14 @@ package com.example.teample_learn.auth;
 
 import com.example.teample_learn.certification.CertificationEntity;
 import com.example.teample_learn.certification.CertificationRepository;
+import com.example.teample_learn.certification.dto.EmailCertificationCheckRequestDto;
 import com.example.teample_learn.certification.dto.EmailCertificationRequestDto;
 import com.example.teample_learn.certification.dto.EmailCertificationResponseDto;
 import com.example.teample_learn.certification.provider.EmailProvider2;
 import com.example.teample_learn.common.CertificationNumber;
 import com.example.teample_learn.common.ResponseDto;
 import com.example.teample_learn.user.UserRepository;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -41,6 +43,20 @@ public class AuthServiceImpl implements AuthService {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
+
+        return EmailCertificationResponseDto.success();
+    }
+
+    @Override
+    public ResponseEntity<? super EmailCertificationResponseDto> validCertificationNumber(EmailCertificationCheckRequestDto requestDto) {
+        Optional<CertificationEntity> certification = certificationRepository.findByCertificationNumberAndUserId(
+                requestDto.getCertificationNumber(), requestDto.getUserId());
+
+        if(certification.isEmpty()) {
+            return EmailCertificationResponseDto.mailCheckFail();
+        }
+
+        certificationRepository.delete(certification.get());
 
         return EmailCertificationResponseDto.success();
     }

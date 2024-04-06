@@ -1,5 +1,6 @@
 package com.example.teample_learn.auth;
 
+import com.example.teample_learn.certification.dto.EmailCertificationCheckRequestDto;
 import com.example.teample_learn.certification.dto.EmailCertificationRequestDto;
 import com.example.teample_learn.certification.dto.EmailCertificationResponseDto;
 import com.example.teample_learn.config.auth.dto.SessionUser;
@@ -19,10 +20,14 @@ public class AuthController {
     private final AuthService authService;
     @PostMapping("/email-certification")
     public ResponseEntity<? super EmailCertificationResponseDto> emailCertification(
-            EmailCertificationRequestDto requestBody, HttpSession session) {
+            EmailCertificationRequestDto requestBody) {
 
-        SessionUser user = (SessionUser) session.getAttribute("user");
-        requestBody.setId(String.valueOf(user.getId()));
         return authService.emailCertification(requestBody);
+    }
+
+    @PostMapping("/email-certification/check")
+    public ResponseEntity<? super EmailCertificationResponseDto> checkEmailCertification(@RequestBody EmailCertificationCheckRequestDto requestDto) {
+
+        return authService.validCertificationNumber(requestDto);
     }
 }

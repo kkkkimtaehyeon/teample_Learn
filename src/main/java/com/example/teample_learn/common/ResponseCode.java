@@ -10,5 +10,6 @@ public interface ResponseCode {
     String CERTIFICATION_FAIL = "CF";
 
     String MAIL_FAIL = "MF";
+    String MAIL_CHECK_FAIL = "MC";
     String DATABASE_ERROR = "DE";
 }

@@ -9,5 +9,6 @@ public interface ResponseMessage {
     String CERTIFICATION_FAIL = "Certification failed";
 
     String MAIL_FAIL = "Mail send failed.";
+    String MAIL_CHECK_FAIL = "Mail Check failed.";
     String DATABASE_ERROR = "Database error.";
 }
