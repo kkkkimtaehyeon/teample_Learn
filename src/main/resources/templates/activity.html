@@ -80,105 +80,44 @@
             </div>
         </div>
     </nav>
-</div>           </li>
-                </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-            </div>
-        </div>
-    </nav>
 </div>
 
 <div class="container w-70 mt-5">
 
     <header class="mb-5">
-        <h1>회원 정보</h1>
-    </header>
+        <div class="card">
+            <div class="card-body col">
+                <div class="row"></div>
+                <div class="row mb-1">
+                    <div>
+                        <h2 class="fw-bold d-inline" th:text="${user.name}">유저</h2>
+                        <h2 class="d-inline text-primary"><i class="fa-solid fa-circle-check"></i></h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="text-secondary fw-bold" id="school-name">조선대학교</div>
+                </div>
 
-
-    <div class="row mb-3">
-        <div class="col-md-3 mb-3">
-            <label for="userName">유저 이름</label>
-            <input class="form-control" id="userName" th:value="${user.name}">
-        </div>
-        <div class="col-md-4 mb-3">
-            <label for="userEmail">유저 이메일</label>
-            <input class="form-control" id="userEmail" th:value="${user.email}">
-        </div>
-        <div class="mb-3">
-            <label for="userEmail">닉네임</label>
-            <input class="form-control">
-        </div>
-    </div>
-
-    <div class="mb-3">
-        <form id="certificationForm">
-            <label>학교 메일 인증</label>
-            <input type="hidden" id="userId" name="id" th:value="${user.id}">
-            <div class="row">
-                <div class="col"><input class="form-control" id="email" name="email" placeholder="학교 메일주소를 입력해주세요."></div>
-                <div class="col"><button class="btn btn-primary" id="submitBtn" type="submit">인증번호 전송</button></div>
             </div>
-        </form>
-    </div>
-
-
-    <div id="certificationCheck">
-        <div class="row">
-            <div class="col"><input class="form-control" id="certificationNumber" placeholder="인증번호를 입력해주세요."></div>
-            <div class="col"><button class="btn btn-primary" id="checkBtn">인증 확인</button></div>
-
         </div>
+    </header>
+    <footer>
+        <div class="p-3">
+            <div class="row row-cols-1 row-cols-md-1" id="post-container">
+                <div class="card border-2 mb-3">
+                    <div class="card-body fw-bold">
+                        <h4 class="card-title fw-bold" style="height: 3rem;"><a href="/teamplay/${item.id}">제목</a></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-
-    </div>
 
 </div>
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-    const submitBtn = document.getElementById('submitBtn');
-
-    submitBtn.addEventListener('click', () => {
-        const formdata = new FormData(document.getElementById('certificationForm'));
-
-        axios.post('/auth/email-certification', formdata)
-            .then(response => {
-                console.log(response);
-                document.getElementById('certificationCheck').classList.remove('visually-hidden');
-            })
-            .catch(error => {
-                console.log(error);
-            })
-    });
-    const checkBtn = document.getElementById('checkBtn');
-
-    checkBtn.addEventListener('click', () => {
-        const certificationNumber = document.getElementById('certificationNumber').value;
-        const userId = document.getElementById('userId').value;
-        const data = {"certificationNumber" : certificationNumber, "userId" : userId};
-        const config = {"ContentType": "application/json"}
-
-        axios.post('/auth/email-certification/check', data, config)
-            .then(response => {
-                console.log(response);
-                if(response) {
-                    document.getElementById('email').disabled = true;
-                    let submitBtn = document.getElementById('submitBtn');
-                    submitBtn.innerText = '인증 완료';
-                    submitBtn.disabled = true;
-                    document.getElementById('certificationCheck').className = 'visually-hidden';
-                }
-            })
-            .catch(error => {
-                console.log(error);
-            })
-
-    });
-
-
 </script>
 <script src="https://kit.fontawesome.com/0df3aecce4.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

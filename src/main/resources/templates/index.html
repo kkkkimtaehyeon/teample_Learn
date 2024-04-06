@@ -47,8 +47,6 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-
                 </ul>
                 <div class="toggles">
                     <div class="btn-group">
@@ -212,8 +210,9 @@ onlyPrivatePages.addEventListener('click', () => {
 
 searchBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    const keyword = document.getElementById('keyword').value;
-    axios.get(`/teamplay?keyword=${keyword}`)
+    const searchKeyword = document.getElementById('keyword').value;
+    const param = { keyword:searchKeyword };
+    axios.get('http://localhost:8081/teamplay', {param})
         .then(function (response) {
             console.log(response);
             loadPages(response);
@@ -263,7 +262,7 @@ function loadPages(response) {
                     </div>
                     <hr class="border-2">
                     <div>
-                        <span class="card-text">${item.author}</span>
+                        <span class="card-text"><a href="#">${item.author}</a></span>
                     </div>
                 </div>
                 </div>

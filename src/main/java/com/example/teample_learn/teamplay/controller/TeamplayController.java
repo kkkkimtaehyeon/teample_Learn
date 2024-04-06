@@ -32,24 +32,13 @@ public class TeamplayController {
     @GetMapping
     public Page<TeamplayResponseDto> allPages(
             @RequestParam(value = "keyword", required = false) String keyword,
-            @PageableDefault(page = 0, size = 20, sort = "id", direction = Direction.DESC) Pageable pageable) {
+            @PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.DESC) Pageable pageable) {
 
         if(keyword != null) {
             return teamplayService.getSearchPages(keyword, pageable);
         }
         return teamplayService.getPages(pageable);
     }
-
-    /*@GetMapping("/public")
-    public Page<TeamplayResponseDto> publicPages(@PageableDefault(page = 0, size = 20, sort = "id", direction = Direction.DESC) Pageable pageable) {
-
-        return teamplayService.getPages("public", pageable);
-    }
-    @GetMapping("/private")
-    public Page<TeamplayResponseDto> privatePages(@PageableDefault(page = 0, size = 20, sort = "id", direction = Direction.DESC) Pageable pageable) {
-
-        return teamplayService.getPages("private", pageable);
-    }*/
 
     @GetMapping("/{id}")
     public ModelAndView view(@PathVariable("id") Long id, HttpSession session) {

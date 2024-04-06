@@ -29,9 +29,11 @@ public class Posts extends BaseTime{
     private String content;
 
     @Column(nullable = false, name = "view_count")
+    @ColumnDefault("0")
     private int viewCount = 0;
 
     @Column(nullable = false, name = "like_count")
+    @ColumnDefault("0")
     private int likeCount = 0;
 
     @Column(nullable = true, name = "tags")
